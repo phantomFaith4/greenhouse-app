@@ -1,0 +1,7 @@
+.notificationComponent{
+    width: 310px;
+    height: 310px;
+    border: 2px solid red;
+    margin: 10px;
+    overflow-y: scroll;
+}

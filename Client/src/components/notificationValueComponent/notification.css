@@ -1,0 +1,27 @@
+.notification{
+    width: 95%;
+    background-color: lightgrey;
+    height: 75px;
+    margin-top: 5%;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+}
+.notificationText{
+    font-size: 14px;
+    margin: 10px;
+}
+.time {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    margin-right: 10px;
+    font-size: 12px;
+} 
+.location{
+    position: absolute;
+    bottom:0; 
+    margin-left: 10px;
+    font-size: 12px;
+} 

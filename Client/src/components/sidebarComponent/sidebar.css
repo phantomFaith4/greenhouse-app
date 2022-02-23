@@ -1,0 +1,22 @@
+.sidebar{
+    width: 75px;
+    height: 100vh;
+    background-color: green;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.sidebarIcon{
+    display: inline-block;
+    text-align: center;
+    font-size: 45px;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+}

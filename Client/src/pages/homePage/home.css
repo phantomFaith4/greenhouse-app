@@ -1,0 +1,13 @@
+.homeComponentsDiv{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 2px solid crimson;
+    width: 500px;
+    height: auto; 
+    flex: 1 1 auto;
+    margin-top: 50px;
+    gap: 0;
+} 
+.home{
+    display: flex;
+}

@@ -1,0 +1,19 @@
+.temperatureComponent{
+    width: 310px;
+    height: 310px;
+    border: 2px solid black;
+    margin: 10px;
+}
+.widgetTitle{
+    font-size: 30px;
+    margin-left: 10%;
+}
+.content{
+    margin: 10px 20px 10px 20px;
+}
+.temperatureValue{
+    display: block;
+    font-size: 70px;
+    margin-left:25%;
+    margin-top: 25%;
+}
