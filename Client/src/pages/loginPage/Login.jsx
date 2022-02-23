@@ -3,23 +3,26 @@ import './login.css';
 import { useState } from 'react';
 import axios from 'axios';
 
-
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user,setUser] = useState([]);
+  const [user,setUser] = useState([]); 
   
   const handleSubmit = async e =>{
     e.preventDefault();
-    const response = await axios.post(  
-      '/api/auth/login' 
-      ,{
-        username,
-        password,
-      } 
-    );   
-   //localStorage.setItem("user",user); 
-   console.log("UserInfo=>",response.data);
+    try{
+      const response = await axios.post(  
+        '/api/auth/login' 
+        ,{ 
+          username,
+          password,
+        } 
+      );   
+     localStorage.setItem('user',JSON.stringify(response.data));
+    }catch(err){
+ 
+    } 
+    console.log('LCL=>',localStorage.getItem('user'));
   };
   return (
     <div className='login'> 
