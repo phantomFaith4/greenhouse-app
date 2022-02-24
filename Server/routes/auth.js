@@ -22,21 +22,13 @@ router.post('/login',async(req,res)=>{
         const user = await User.findOne({username:req.body.username});
         !user && res.status(400).json("Username or password are wrong !!!")
         
-        const validated = await bcrypt.compare(req.body.password,user.password);
+        const validated = await bcrypt.compare(req.body.password, user.password);
         !validated && res.status(400).json("Username or password ar wrong");
 
         const {password, ...others} = user._doc;
         res.status(200).json(others);
-    }catch(err){ 
+    }catch(err){  
         res.status(500).json(err);
     }
-})
-
-router.get('/log',async(req,res)=>{
-    try{
-        res.status(200).json('LOG');
-    }catch(err){
-        res.status(400).json(err);
-    } 
 })
 module.exports = router;

@@ -4,7 +4,7 @@ import Login from "./pages/loginPage/Login";
 function App() {
   return (
     <div className="App"> 
-     <Login /> 
+     <Home /> 
     </div>
   );
 }

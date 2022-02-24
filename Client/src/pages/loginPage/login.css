@@ -1,5 +1,5 @@
 .login{
-    background-color: green;
+    background-color: #74B49B; 
     width: 100%;
     height: 100vh;
     display: flex;
@@ -9,7 +9,7 @@
 .loginFormDiv{
     width: 500px;
     height: 500px;
-    background-color: red;
+    background-color: #F6FBF9; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,12 +21,24 @@
 }
 .inputEmail, .inputPassword{
     display: block;
-    width: 99%;
+    width: 95%;
     height: 50px;
     margin-top: 25px;
     margin-bottom: 25px;
     border-radius: 10px;
     font-size: 20px; 
+    color: #212B27;
+    border: 2px solid #212B27;
+}
+.inputEmail::placeholder , .inputPassword::placeholder{
+    color: #212B27;
+    font-size: 20px;
+}
+.inputEmail[type='text'] , .inputPassword[type='password'] {
+    padding-left: 15px; 
+}
+.inputEmail:focus , .inputPassword:focus{
+    border: 3px solid #212B27;
 }
 .loginButton{
     display: block;
@@ -39,10 +51,18 @@
     text-align: center;
     margin:0 auto;
     display:block;
+    background-color: #74B49B;
+    color: #F6FBF9;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid #212B27;
+}
+.loginButton:active{
+    border: 3px solid #212B27;
 }
 .formTitle{
     font-size:50px;
-    color: white; 
+    color: #212B27; 
     display:block;
     text-align: center;
     font-family: 'Open Sans', sans-serif;
@@ -50,4 +70,6 @@
 .registerLink{
     display: table;
     margin: 0 auto;
+    margin-top: 10px;
+    color: #212B27;
 }

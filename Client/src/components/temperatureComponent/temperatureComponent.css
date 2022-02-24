@@ -3,6 +3,7 @@
     height: 310px;
     border: 2px solid black;
     margin: 10px;
+    background-color: white;
 }
 .widgetTitle{
     font-size: 30px;

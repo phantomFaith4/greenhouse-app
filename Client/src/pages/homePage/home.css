@@ -3,11 +3,13 @@
     grid-template-columns: repeat(3, 1fr);
     border: 2px solid crimson;
     width: 500px;
-    height: auto; 
+    height: 100vh; 
     flex: 1 1 auto;
     margin-top: 50px;
     gap: 0;
+    background-color: #F6FBF9;
+    overflow: auto; 
 } 
 .home{
-    display: flex;
+    display: flex; 
 }
