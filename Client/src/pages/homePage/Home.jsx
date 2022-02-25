@@ -8,6 +8,7 @@ import NotificationComponent from '../../components/notificationComponent/Notifi
 export default function Home() {
     return (
         <div className='home'> 
+
             <Sidebar />
             <Topbar />
             <div className='homeComponentsDiv'>
