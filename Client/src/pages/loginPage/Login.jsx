@@ -3,6 +3,7 @@ import './login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
+import {useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
@@ -10,8 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [user,setUser] = useState([]); 
-
- 
+  const navigate = useNavigate(); 
   const handleSubmit = async e =>{
     e.preventDefault();
       const response = await axios.post(  
@@ -27,13 +27,13 @@ export default function Login() {
         }, 2000);
       }) 
      localStorage.setItem('user',JSON.stringify(response.data));
-
+     navigate('/home');
   };
   return (
     <div className='login'> 
         <div className='loginFormDiv'>
             <span className='formTitle'>Login to Smart Greenhouse</span>
-            <form onSubmit={handleSubmit} className='loginForm'>
+            <form onSubmit={handleSubmit } className='loginForm'>
                 <input onChange={({ target }) => setUsername(target.value)} className='inputEmail' type='text' placeholder='Email' />
                 <input onChange={({ target }) => setPassword(target.value)} className='inputPassword' type='password' placeholder='Password' />
                 <button className="loginButton" type="submit">Login</button>
