@@ -1,6 +1,5 @@
-import React from 'react'
 import './login.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import {useNavigate } from 'react-router-dom';
@@ -12,23 +11,37 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [user,setUser] = useState([]); 
   const navigate = useNavigate(); 
+  useEffect(()=>{
+    const userStorage = JSON.parse(localStorage.getItem('user'));
+    if(userStorage!= null){
+      setUser(JSON.parse(localStorage.getItem('user')));
+      navigate('/home');
+    }
+  },[]);
   const handleSubmit = async e =>{
     e.preventDefault();
+    if(username.length > 0 && password.length > 0){
+
       const response = await axios.post(  
         '/api/auth/login' 
         ,{ 
           username, 
           password,
         } 
-      ).catch(function (err) {
-        setErrorMessage(err);
-        setTimeout(()=> {
-          setErrorMessage()
-        }, 2000);
-      }) 
-     localStorage.setItem('user',JSON.stringify(response.data));
-     navigate('/home');
-  };
+        ).catch(function (err) {
+          setErrorMessage("Username or password are wrong!!!");
+          console.log(err);
+          setTimeout(()=> {
+            setErrorMessage()
+          }, 2000);
+        }) 
+        localStorage.setItem('user',JSON.stringify(response.data));
+        setUser(response.data);
+        navigate('/home');
+      }else{
+        setErrorMessage("You need to enter username and password !!!")
+      }
+    };
   return (
     <div className='login'> 
         <div className='loginFormDiv'>
@@ -41,7 +54,7 @@ export default function Login() {
                 REGISTER
                 </span>
             </form>
-            {errorMessage && <Alert variant="filled" severity="error">Username or password are wrong!!!</Alert>  }
+            {errorMessage && <Alert variant="filled" severity="error">{errorMessage}</Alert>  }
         </div>
     </div>
   ) 
