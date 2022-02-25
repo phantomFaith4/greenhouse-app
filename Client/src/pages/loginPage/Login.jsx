@@ -3,6 +3,8 @@ import './login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
+import {Navigate } from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router';
 
 
 export default function Login() {
@@ -10,7 +12,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [user,setUser] = useState([]); 
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleSubmit = async e =>{
     e.preventDefault();
       const response = await axios.post(  
@@ -26,6 +29,9 @@ export default function Login() {
         }, 2000);
       }) 
      localStorage.setItem('user',JSON.stringify(response.data));
+     if(location.state?.from){
+       navigate(location.state.from);
+     }
   };
   return (
     <div className='login'> 
