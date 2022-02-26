@@ -5,6 +5,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Account from "./pages/accountPage/Account";
+import ErrorPage from "./pages/errorPage/ErrorPage";
 
 
 function App() {
@@ -13,7 +15,9 @@ function App() {
      <BrowserRouter>
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/" element={<Login />} /> 
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>,
     </div>

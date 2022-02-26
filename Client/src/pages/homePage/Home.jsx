@@ -4,7 +4,7 @@ import Topbar from '../../components/topbarComponent/Topbar';
 import TemperatureComponent from '../../components/temperatureComponent/TemperatureComponent';
 import './home.css';
 import NotificationComponent from '../../components/notificationComponent/NotificationComponent';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 
 
 export default function Home() {
@@ -13,7 +13,6 @@ export default function Home() {
         setUser(JSON.parse(localStorage.getItem('user')));
     },[]); 
     console.log("Home local storage=> ",user);
-
     return (
         <div className='home'> 
             <Sidebar />
