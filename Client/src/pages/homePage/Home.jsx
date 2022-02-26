@@ -23,11 +23,11 @@ export default function Home() {
                 <TemperatureComponent />
                 <TemperatureComponent />
                 <NotificationComponent />
-                <NotificationComponent />
-                <NotificationComponent />
-                <NotificationComponent />
-                <NotificationComponent />
-                <NotificationComponent />
+                <TemperatureComponent /> 
+                <TemperatureComponent />
+                <TemperatureComponent />
+                <TemperatureComponent />
+                <TemperatureComponent />
             </div>
         </div>
     );

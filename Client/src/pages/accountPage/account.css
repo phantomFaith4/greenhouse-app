@@ -3,7 +3,15 @@
     height: 100vh;
     background-color: #F6FBF9;
     margin-top: 50px;
+    border: 2px solid brown;
 }
 .account{
     display:flex;
 }
+.tabHolder{
+    margin-left: 10px;
+    margin-top: 20px;
+    background-color: white;
+    height: 85vh;
+    border: 2px solid black;
+} 

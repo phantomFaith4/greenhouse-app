@@ -51,12 +51,13 @@ export default function Account(props) {
       <Topbar />
       <Sidebar />
         <div className="accountComponents">
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="User settings"  />
-            <Tab label="Greenhouse settings" />
-            <Tab label="Notification settings"  />
-            <Tab label="Privacy settings" />
-          </Tabs>
+          <div className='tabHolder'>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="User settings"  />
+              <Tab label="Greenhouse settings" />
+              <Tab label="Notification settings"  />
+              <Tab label="Privacy settings" />
+            </Tabs>
             <TabPanel value={value} index={0}>
               <UserSettings />
             </TabPanel>
@@ -69,6 +70,7 @@ export default function Account(props) {
             <TabPanel value={value} index={3}>
               Item Four
             </TabPanel>
+          </div>
         </div>
     </div>
   )

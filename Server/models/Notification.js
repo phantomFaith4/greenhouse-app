@@ -10,7 +10,7 @@ const NotifiactionSchema = new mongoose.Schema({
         required:true,
     },
 },
-{timestamps},
+    {timestamps:true},
 );
 
 module.exports = mongoose.model('Notification', NotifiactionSchema);

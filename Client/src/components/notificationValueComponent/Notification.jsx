@@ -1,14 +1,14 @@
 import React from 'react'
 import './notification.css';
 
-export default function Notification() {
+export default function Notification({notification}) {
   return (
     <div className='notification'>
-       <p className='notificationText'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Placeat, atque dolor?
+       <p className='notificationText'>
+         {notification.value}
         </p>
-        <span className='location'>Greenhouse 13</span>
-        <span className='time'>13.13.1313</span>
+        <span className='location'>{notification.location}</span>
+        <span className='time'>{new Date(notification.createdAt).toDateString()}</span>
     </div>
-  )
+  ) 
 }

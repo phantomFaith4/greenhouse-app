@@ -19,7 +19,7 @@ mongoose
 
 app.use('/api/notification',notificationRoute);
 app.use('/api/auth',authRoute);
-
+ 
 app.listen(8000,()=>{
     console.log("Server is active at port 8000");
 })

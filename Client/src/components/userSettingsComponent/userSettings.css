@@ -6,3 +6,7 @@
 .userSettings{
     border:2px solid blue;
 }
+.inputFirstnameSettings, .inputLastnameSettings, .inputPhoneSettings, .inputEmailSettings{
+    width: 250px;
+    height: 50px;
+}
