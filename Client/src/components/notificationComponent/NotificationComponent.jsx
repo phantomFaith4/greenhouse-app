@@ -20,9 +20,9 @@ export default function NotificationComponent() {
     <div className='notificationComponent'>
         <span className='widgetTitle'>NOTIFICATIONS</span>
         { 
-          notifications.map(d => 
+          notifications.map(n =>  
           ( 
-          <Notification key={d.id} notification={d}/>
+          <Notification key={n.id} notification={n}/>
           ))} 
     </div>
   )
