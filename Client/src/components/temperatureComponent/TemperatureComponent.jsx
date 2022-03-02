@@ -7,8 +7,11 @@ import axios from 'axios';
 export default function TemperatureComponent() {
   const [value, setValue] = React.useState(10);
   const handleChange = async (event, newValue) => {
-      //const res = await axios.get()
-      setValue(newValue);
+    setValue(newValue);
+    const res = await axios.post('http://localhost:8000/api/temperature/new',{
+      temperature:value,
+      automatic:false,
+    })
   }; 
   return (
         <div className='temperatureComponent'>
