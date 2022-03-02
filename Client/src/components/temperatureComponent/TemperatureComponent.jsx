@@ -7,7 +7,7 @@ import axios from 'axios';
 export default function TemperatureComponent() {
   const [value, setValue] = React.useState(10);
   const handleChange = async (event, newValue) => {
-      const res = await axios.get()
+      //const res = await axios.get()
       setValue(newValue);
   }; 
   return (

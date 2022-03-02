@@ -19,8 +19,8 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use('/api/notification',notificationRoute);
-app.use('/api/auth',authRoute);
-app.use('/api/temp',temperatureRoute);
+app.use('/api/auth',authRoute); 
+app.use('/api/temperature',temperatureRoute);
 
 app.listen(8000,()=>{
     console.log("Server is active at port 8000");
