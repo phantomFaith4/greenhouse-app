@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const TemperatureSchema = new mongoose.Schema({
     temperature:{
-        type:String,
-        automatic:false, 
+        value : Number,
+        automatic : false, 
     },
 },
 {timestamps:true},

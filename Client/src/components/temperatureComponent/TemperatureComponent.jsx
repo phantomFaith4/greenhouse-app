@@ -13,7 +13,7 @@ export default function TemperatureComponent() {
           <div className='content'>
             <span className='widgetTitle'>TEMPERATURE</span>
             <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"   onChange={handleChange}/>
-            <Button variant="contained">AUTO</Button>
+            <Button variant="contained">AUTO </Button>
             <span className='temperatureValue'>{value}°C</span>
           </div>
         </div>

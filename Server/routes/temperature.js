@@ -2,11 +2,20 @@ const router = require('express').Router();
 const Temperature = require('../models/Temperature');
 
 
-router.get('/',async(req,res)=>{
-    res.status(200).json("temperature GET");
+router.post('/new',async(req,res)=>{
+    try{  
+        const newTemp = new Temperature({
+            value: req.body.value,
+            automatic: req.body.automatic,
+        });
+        const temp = newTemo.save();
+        res.status(200).json(temp);
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
 
-router.post('/',async(req,res)=>{
+router.get('/',async(req,res)=>{
 
 });
 module.exports = router;
