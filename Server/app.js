@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const notificationRoute = require('./routes/notifications');
 const authRoute = require('./routes/auth');
+const temperatureRoute = require('./routes/temperature');
 const app = express();
 app.use(express.json());
 
@@ -19,7 +20,8 @@ mongoose
 
 app.use('/api/notification',notificationRoute);
 app.use('/api/auth',authRoute);
- 
+app.use('/api/temp',temperatureRoute);
+
 app.listen(8000,()=>{
     console.log("Server is active at port 8000");
 })

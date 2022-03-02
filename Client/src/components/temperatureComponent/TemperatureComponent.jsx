@@ -2,10 +2,12 @@ import React from 'react';
 import './temperatureComponent.css';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 export default function TemperatureComponent() {
   const [value, setValue] = React.useState(10);
-  const handleChange = (event, newValue) => {
+  const handleChange = async (event, newValue) => {
+      const res = await axios.get()
       setValue(newValue);
   }; 
   return (
