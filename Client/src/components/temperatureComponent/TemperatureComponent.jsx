@@ -4,30 +4,37 @@ import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import {useState } from 'react';
+import Alert from '@mui/material/Alert';
 
 
 export default function TemperatureComponent() {
-  const [value, setValue] = useState(10);
-  const handleChange =  (event, newValue) => {
-    setValue(newValue);
-   /*  
+  const [value, setValue] = useState(33);
+  const [auto,setAuto] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleChange = (event, newValue) => {
+    setValue(newValue); 
+  };
+  const handleButton = () =>{
+    if(auto===false){
+      setAuto(true)
+    }else{
+      setAuto(false);
+    }
+  } 
+  const pushNewTemp = async () => {
     const res = await axios.post('/api/temperature/new',{
       temperature:value,
-      automatic:false,  
-    })
-    console.log("test"); */
+      automatic:auto,  
+    });
+    setErrorMessage("Temperature changed to : ");
   }; 
-  const pushNewTemp = async ()=>{
-    setTimeout(()=> { 
-      console.log("New Temp=>",value);
-    }, 2000);
-  };
   return (
-        <div className='temperatureComponent'>
+    <div className='temperatureComponent'>
+          {errorMessage && <Alert variant="filled" severity="error">{errorMessage}</Alert>  }
           <div className='content'>
             <span className='widgetTitle'>TEMPERATURE</span>
-            <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"   onChange={handleChange}/>
-            <Button variant="contained">AUTO </Button>
+            <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={pushNewTemp} onChange={handleChange}/>
+            <Button onClick={handleButton} variant="contained">AUTO </Button>
             <span className='temperatureValue'>{value}°C</span>
           </div>
         </div>
