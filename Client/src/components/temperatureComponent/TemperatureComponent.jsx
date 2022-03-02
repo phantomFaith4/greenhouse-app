@@ -3,16 +3,25 @@ import './temperatureComponent.css';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import {useState } from 'react';
+
 
 export default function TemperatureComponent() {
-  const [value, setValue] = React.useState(10);
-  const handleChange = async (event, newValue) => {
+  const [value, setValue] = useState(10);
+  const handleChange =  (event, newValue) => {
     setValue(newValue);
-    const res = await axios.post('http://localhost:8000/api/temperature/new',{
+   /*  
+    const res = await axios.post('/api/temperature/new',{
       temperature:value,
-      automatic:false,
+      automatic:false,  
     })
+    console.log("test"); */
   }; 
+  const pushNewTemp = async ()=>{
+    setTimeout(()=> { 
+      console.log("New Temp=>",value);
+    }, 2000);
+  };
   return (
         <div className='temperatureComponent'>
           <div className='content'>
