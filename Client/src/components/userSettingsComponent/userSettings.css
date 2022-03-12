@@ -6,7 +6,34 @@
 .userSettings{
     border:2px solid blue;
 }
+#profileImg{
+    display: none;
+}
 .inputFirstnameSettings, .inputLastnameSettings, .inputPhoneSettings, .inputEmailSettings{
-    width: 250px;
+    width: 350px;
     height: 50px;
+    margin: 25px;
+}
+.profileImageDiv{
+    position: relative; 
+    width: 100px;
+    margin: 25px;
+}
+.editImage{
+    position: absolute;
+    top: 0px;
+    left: 75px;
+    background-color: #74B49B;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+.editImageIcon{
+    font-size: 25px;
+    margin-top: 7px;
+    color: white;
 }
