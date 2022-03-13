@@ -1,7 +1,7 @@
 .topbar{
     width: calc(100% - 75px);
     height: 50px; 
-    background-color: blue;
+    background-color: antiquewhite;
     position: absolute;
     top: 0;
     left: 75px;
