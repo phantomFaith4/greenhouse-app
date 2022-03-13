@@ -1,0 +1,27 @@
+.bigNotification{
+    width: 95%;
+    background-color: lightgrey;
+    height: 100px;
+    margin-top: 5%;
+    margin-left: 25px;
+    margin-right: 5px;
+    position: relative;
+}
+.bigNotificationText{
+    font-size: 20px;
+    margin: 10px;
+}  
+.bigTime {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    margin-right: 10px;
+    font-size: 15px;
+} 
+.bigLocation{
+    position: absolute;
+    bottom:0; 
+    margin-left: 10px;
+    font-size: 15px;
+} 
