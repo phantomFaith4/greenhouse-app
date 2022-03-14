@@ -4,7 +4,11 @@ const TemperatureSchema = new mongoose.Schema({
     temperature:{ 
         type : Number,
         required:true,    
-},  
+    },
+    location:{
+        type:String,
+        required:true,
+    },  
     automatic:{ 
         type:Boolean, 
         default:false,
