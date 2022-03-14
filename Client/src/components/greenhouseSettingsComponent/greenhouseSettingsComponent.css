@@ -1,0 +1,27 @@
+.greenhouseSettings{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.greenhouseContainer{
+    border: 2px solid red;
+    width: 1000px;
+    height: 365px;
+    flex: 1 1 auto;
+}
+.tg , td , tr , th{
+    border: 2px solid black;
+}
+.tg{
+    width: 100%;
+}
+.tg, td {
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+}
+.deleteIcon{
+    color: red;
+    cursor: pointer;
+    font-size: 24px;
+}

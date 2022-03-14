@@ -10,7 +10,6 @@ export default function NotificationPage() {
         <Sidebar/>
         <Topbar /> 
         <div className='notificationContainer'>
-        <p>This is test test of this big notif</p>
             <div className='notificationsComponentsDiv'>
               <BigNotification />
               <BigNotification />

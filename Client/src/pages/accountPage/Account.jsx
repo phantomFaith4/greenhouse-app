@@ -9,7 +9,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import UserSettings from '../../components/userSettingsComponent/UserSettings';
-
+import GreenhouseSettingsComponent from '../../components/greenhouseSettingsComponent/GreenhouseSettingsComponent';
 
 export default function Account(props) {
   function TabPanel(props) {
@@ -62,7 +62,7 @@ export default function Account(props) {
               <UserSettings />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Item Two
+                <GreenhouseSettingsComponent />
             </TabPanel>
             <TabPanel value={value} index={2}>
               Item Three
