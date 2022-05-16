@@ -23,18 +23,26 @@ export default function TemperatureComponent() {
     }
   } 
   const pushNewTemp = async () => {
-    const res = await axios.post('/api/temperature/new',{
-      temperature:value,
-      location:location,
-      automatic:auto,  
-    });
-    setErrorMessage(`Temperature changed to : ${value} °C`);
-    setTimeout(()=> {
-      setErrorMessage()
-    }, 1000);
+    try{
+      const res = await axios.post('/api/temperature/new',{
+        temperature:value,
+        location:location,
+        automatic:auto,  
+      });
+      setErrorMessage(`Temperature changed to : ${value} °C`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 1000);
+    }catch(err){
+      console.log("Push new temperature ERROR=> ",err);
+    }
   }; 
   useEffect(()=>{
-    
+    try{
+      
+    }catch(err){
+      console.log(err);
+    }
   },[]);
   return (
     <div className='temperatureComponent'>

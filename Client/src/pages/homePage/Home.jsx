@@ -9,14 +9,18 @@ import { useState, useEffect} from 'react';
 
 export default function Home() {
     const [user,setUser] = useState([]);
+    const [location, setLocation] = useState('Multiverse');
     useEffect(()=>{
         setUser(JSON.parse(localStorage.getItem('user')));
     },[]); 
-    console.log("Home local storage=> ",user);
+    //console.log("Home local storage=> ",user); 
+    const getName = (location) =>{
+        setLocation(location);
+    }
     return (
         <div className='home'> 
             <Sidebar />
-            <Topbar />
+            <Topbar getData={getName} />
             <div className='homeComponentsDiv'>
                 <TemperatureComponent />
                 <TemperatureComponent />
