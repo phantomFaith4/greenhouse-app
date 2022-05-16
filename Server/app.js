@@ -1,5 +1,5 @@
 require('dotenv').config();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); 
 
 const express =  require('express');
 const mongoose = require('mongoose');
@@ -23,5 +23,5 @@ app.use('/api/auth',authRoute);
 app.use('/api/temperature',temperatureRoute);
 
 app.listen(8000,()=>{
-    console.log("Server is active at port 8000");
+    console.log("Server is active at port 8000"); 
 })

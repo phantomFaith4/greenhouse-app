@@ -10,6 +10,7 @@ import Alert from '@mui/material/Alert';
 export default function TemperatureComponent() {
   const [value, setValue] = useState(33);
   const [auto,setAuto] = useState(false);
+  const [location,setLocation] = useState('test');
   const [errorMessage, setErrorMessage] = useState('');
   const handleChange = (event, newValue) => {
     setValue(newValue); 
@@ -24,6 +25,7 @@ export default function TemperatureComponent() {
   const pushNewTemp = async () => {
     const res = await axios.post('/api/temperature/new',{
       temperature:value,
+      location:location,
       automatic:auto,  
     });
     setErrorMessage(`Temperature changed to : ${value} °C`);
