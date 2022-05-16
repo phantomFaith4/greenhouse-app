@@ -22,7 +22,7 @@ export default function Home() {
             <Sidebar />
             <Topbar getData={getName} />
             <div className='homeComponentsDiv'>
-                <TemperatureComponent />
+                <TemperatureComponent loc={location} />
                 <TemperatureComponent />
                 <TemperatureComponent />
                 <TemperatureComponent />

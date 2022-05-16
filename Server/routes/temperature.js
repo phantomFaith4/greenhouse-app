@@ -7,7 +7,7 @@ router.post('/new',async(req,res)=>{
         const newTemp = new Temperature({
             temperature: req.body.temperature,
             location: req.body.location, 
-            automatic: req.body.automatic,  
+            automatic: req.body.automatic,
         });  
         const temp = await newTemp.save();
         res.status(200).json(temp);
@@ -16,7 +16,11 @@ router.post('/new',async(req,res)=>{
     }
 });
 router.put('/:id',async(req,res)=>{
+    try{
 
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
 
 router.get('/',async(req,res)=>{
