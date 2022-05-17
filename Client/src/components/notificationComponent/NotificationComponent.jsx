@@ -4,18 +4,18 @@ import Notification from '../notificationValueComponent/Notification';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 
-export default function NotificationComponent() {
-  
+export default function NotificationComponent({loc}) {
+
   const [notifications,setNotifications] = useState([]);
-  
+
   useEffect(()=>{
-    const fetchChampions = async () =>{ 
-        const response = await axios.get('/api/notification/all');
+    const fetchNotifications = async () =>{ 
+        const response = await axios.get(`/api/notification/${loc}`);
         setNotifications(response.data);
     }; 
-    fetchChampions();
-  },[]);
-  console.log("log=>",notifications);
+    fetchNotifications();
+  },[loc]);
+
   return (
     <div className='notificationComponent'>
         <span className='widgetTitle'>NOTIFICATIONS</span>

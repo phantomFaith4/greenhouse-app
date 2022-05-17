@@ -11,7 +11,9 @@ export default function TemperatureComponent({loc}) {
   const [value, setValue] = useState(33);
   const [auto,setAuto] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const  [button ,setButton] = useState('OFF');
+  const [button ,setButton] = useState('OFF');
+  const [update, setUpdate] = useState(false);
+
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -39,39 +41,45 @@ export default function TemperatureComponent({loc}) {
       console.log("Push new temperature ERROR=> ",err);
     }
   }; 
+  const updateTemp = async () =>{
+    try{
+      const res = await axios.put(`/api/temperature/${loc}`,{
+        temperature: value,
+        automatic: auto, 
+      });
+      setErrorMessage(`Temperature changed to : ${value} °C`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 1000);
+    }catch(err){   
+      console.log(err); 
+    }
+  };
   useEffect(()=>{
     console.log('TEST LOCATION=>',loc);
     const fetch = async () =>{
       try{
         const res = await axios.get(`/api/temperature/${loc}`);
-        console.log("Fetch data=>",res.data," at location=> ",loc);
         setValue(res.data.temperature);
         setAuto(res.data.automatic);
+        setUpdate(true);
       }catch(err){
         console.log(err);
+        setUpdate(false); 
       }
     } 
-    const put = async () =>{
-      try{
-        const res = await axios.put(`/api/temperature/${loc}`);
-        console.log(res.data.location);
-      }catch(err){   
-        console.log(err); 
-      }
-    };
     fetch();
-    put();
   },[loc]);
 
   return (
     <div className='temperatureComponent'>
           <div className='content'>
             <span className='widgetTitle'>TEMPERATURE</span>
-            <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={pushNewTemp} onChange={handleChange}/>
+            <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp } onChange={handleChange}/>
             <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
             <span className='temperatureValue'>{value}°C</span>
           {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div> 
     </div>
-    );
+    ); 
 }

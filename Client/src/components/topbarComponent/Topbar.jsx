@@ -10,6 +10,7 @@ export default function Topbar(props) {
                 <option value="green1">Green 1</option>
                 <option value="green2">Green 2</option>
                 <option value="green3">Green 3</option>
+                <option value="green4">Green 4</option>
             </select>
         </div>
     );

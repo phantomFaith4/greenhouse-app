@@ -27,7 +27,7 @@ export default function Home() {
             <Topbar getData={getName} />
             <div className='homeComponentsDiv'>
                 <TemperatureComponent loc={location} />
-                <NotificationComponent />
+                <NotificationComponent loc={location} />
             </div>
         </div>
     );

@@ -21,7 +21,7 @@ export default function GreenhouseSettingsComponent() {
                 </tr>
                 <tr>
                     <td className="tg-0lax">Greenhouse 1</td>
-                    <td className="tg-0lax">Paprika</td>
+                    <td className="tg-0lax">Paprika</td> 
                     <td className="tg-0lax">Ovdje je paprika</td>
                     <td className="tg-0lax">15m2</td>
                     <td className="tg-0lax">

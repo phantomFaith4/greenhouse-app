@@ -8,7 +8,22 @@ router.get('/all',async(req,res)=>{
    }catch(err){
        res.status(400).json(err);
    }
-}) 
+});
+
+router.get('/:location', async(req,res)=>{
+    const location = req.params.location;
+    try{
+        try{
+            const doc = await Notification.find({location : location});
+            res.status(200).json(doc);
+        }catch(err){
+            res.status(404).json(err);
+        }
+    }catch(err){
+        res.status(400).json(err);
+    }
+});
+
 router.post('/new',async(req,res)=>{
     try{
         const newNotification = new Notification({
