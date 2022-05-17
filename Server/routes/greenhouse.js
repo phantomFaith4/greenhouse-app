@@ -3,7 +3,12 @@ const Greenhouse = require('../models/Greenhouse');
 
 
 router.get('/all', async(req,res)=>{
-    
+    try{
+        const greenhouse = await Greenhouse.find();
+        res.status(200).json(greenhouse);
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
 
 router.put('/', async(req,res)=>{
@@ -27,6 +32,10 @@ router.post('/new', async(req,res)=>{
     }catch(err){
         res.status(400).json(err);
     }
+});
+
+router.delete('/:id',async(req,res)=>{
+
 });
 
 module.exports = router;

@@ -3,7 +3,7 @@ const Notification = require('../models/Notification');
 
 router.get('/all',async(req,res)=>{
    try{
-    let notifications = await Notification.find();
+    const notifications = await Notification.find();
     res.status(200).json(notifications);
    }catch(err){
        res.status(400).json(err);
