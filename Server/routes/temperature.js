@@ -17,7 +17,10 @@ router.post('/new',async(req,res)=>{
 router.put('/:location', async(req,res)=>{
     try{
         const filter = { location: req.params.location };
-        const update = { temperature: req.body.temperature };
+        const update = { 
+            temperature: req.body.temperature,
+            automatic: req.body.automatic,
+        };
         try{
             const doc = await Temperature.findOneAndUpdate(filter, update, {
             new: true
@@ -25,13 +28,25 @@ router.put('/:location', async(req,res)=>{
             res.status(200).json(doc);
         }catch(err){
             res.status(404).json(err);
-        }
+        }   
     }catch(err){ 
         res.status(400).json(err);
     }
 });
  
-router.get('/',async(req,res)=>{
-
+router.get('/:location',async(req,res)=>{
+    const location = req.params.location;
+    try{
+        try{
+            const doc = await Temperature.findOne({location : location});
+            res.status(200).json(doc);
+        }catch(err){
+            res.status(404).json(err);
+        }
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
+
+
 module.exports = router;

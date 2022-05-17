@@ -38,6 +38,14 @@ export default function TemperatureComponent({loc}) {
     }
   }; 
   useEffect(()=>{
+    const fetch = async () =>{
+      try{
+        const res = await axios.get('/api/temperature/green2');
+        console.log("Fetch data",res);
+      }catch(err){
+        console.log(err);
+      }
+    }
     const put = async () =>{
       try{
         const res = await axios.put('api/temperature/green2');
@@ -46,6 +54,7 @@ export default function TemperatureComponent({loc}) {
         console.log(err);
       }
     };
+    fetch();
     put();
   },[]);
   return (
