@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from '../../components/sidebarComponent/Sidebar';
 import Topbar from '../../components/topbarComponent/Topbar';
 import './account.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

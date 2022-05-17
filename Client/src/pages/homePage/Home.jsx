@@ -6,7 +6,6 @@ import './home.css';
 import NotificationComponent from '../../components/notificationComponent/NotificationComponent';
 import { useState, useEffect} from 'react';
 
-
 export default function Home() {
     const [user,setUser] = useState([]);
     const [location, setLocation] = useState('green1');
@@ -20,7 +19,6 @@ export default function Home() {
 
         };
     },[]); 
-    //console.log("Home local storage=> ",user); 
     return (
         <div className='home'> 
             <Sidebar />

@@ -1,7 +1,7 @@
 import React from 'react'
 import './userSettings.css';
 import {useState, useEffect } from 'react';
-
+import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -14,20 +14,47 @@ export default function UserSettings() {
   const [open, setOpen] = useState(false);
   const [user,setUser] = useState([]);
 
+  const [name,setName] = useState();
+  const [lastname,setLastname] = useState();
+  const [email,setEmail] = useState();
+  const [phone,setPhone] = useState();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
       setOpen(false);
   };
-  useEffect(()=>{
+  const updateUser = async ()=>{
     try{
-        setUser(JSON.parse(localStorage.getItem('user')));
+      const update = await axios.put(`/api/user/:id`,{
+        name:name,
+        lastname:lastname,
+        email:email,
+        phone:phone,
+      });
+      setOpen(false);
     }catch(err){
 
     };
-  },[]); 
-  
+  }
+  useEffect(()=>{
+      const fetch = async()=>{
+        try{
+         const user = await JSON.parse(localStorage.getItem('user'));
+         try{
+           const res = await axios.get(`/api/user/${user._id}`);
+           setUser(res.data);
+         }catch(err){
+
+         };
+        }catch(err){
+
+        }
+      };
+      fetch();
+  },[updateUser]); 
+
   return (
     <div className='userSettings'>
         <div className='profileImageDiv'>
@@ -41,12 +68,12 @@ export default function UserSettings() {
         </div>
         <div className='userInfoDiv'>
           <div className='userPart1'>
-            <span className='userNameSpan'>ERNAD</span>
-            <span className='userLastnameSpan'>KARAHASANOVIC</span>
+            <span className='userNameSpan'>{user.name}</span>
+            <span className='userLastnameSpan'>{user.lastname}</span>
           </div>
           <div className='userPart2'>
-            <span className='emailSpan'>ernad.karahasanovic@gmail.com</span>
-            <span className='phoneSpan'>061-449-540</span>
+            <span className='emailSpan'>{user.email}</span>
+            <span className='phoneSpan'>{user.phone}</span>
           </div>
         </div>
         <div className='editProfileParentDiv'>
@@ -59,14 +86,14 @@ export default function UserSettings() {
                     <DialogContentText>
                         Fill information about User you want add or edit
                     </DialogContentText>
-                        <TextField  autoFocus margin="dense" id="name" label="Name" type="text" fullWidth variant="standard" />
-                        <TextField  autoFocus margin="dense" id="lastname" label="Lastname" type="text" fullWidth variant="standard" />
-                        <TextField  autoFocus margin="dense" id="email" label="Email address" type="email" fullWidth variant="standard" />
-                        <TextField  autoFocus margin="dense" id="phone" label="Phone number" type="phone" fullWidth variant="standard" />
+                        <TextField  defaultValue={user.name} onChange={(e)=>setName(e.target.value)} autoFocus margin="dense" id="name" label="Name" type="text" fullWidth variant="standard" />
+                        <TextField  defaultValue={user.lastname} onChange={(e)=>setLastname(e.target.value)} autoFocus margin="dense" id="lastname" label="Lastname" type="text" fullWidth variant="standard" />
+                        <TextField  defaultValue={user.email} onChange={(e)=>setEmail(e.target.value)} autoFocus margin="dense" id="email" label="Email address" type="email" fullWidth variant="standard" />
+                        <TextField  defaultValue={user.phone} onChange={(e)=>setPhone(e.target.value)} autoFocus margin="dense" id="phone" label="Phone number" type="phone" fullWidth variant="standard" />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleClose}>Edit</Button>
+                        <Button onClick={updateUser}>Edit</Button>
                     </DialogActions>
             </Dialog>
         </div>
