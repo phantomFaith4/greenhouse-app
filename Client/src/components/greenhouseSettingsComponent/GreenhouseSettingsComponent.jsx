@@ -40,7 +40,6 @@ export default function GreenhouseSettingsComponent() {
             console.log(err);
         }
     };
-
     const addGreenhouse = async ()=>{
         try{
             const res = await axios.post(`/api/greenhouse/new`,{

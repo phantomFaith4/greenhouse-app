@@ -13,7 +13,7 @@
 }
 .profileImageDiv{
     position: relative; 
-    width: 100px;
+    width: 95%;
     margin: 25px;
 }
 .editImage{
@@ -55,4 +55,56 @@
 }
 .submitButtonSettings:hover{
     background-color: red;
+}
+.userInfoDiv{
+    margin-left: 2.4%;
+    margin-right: 2.4%;
+    display: flex;
+    height: 300px;
+    align-items:center;
+    border: 3px solid #74B49B;
+    margin-bottom: 20px;
+}
+.userPart1{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: space-around;
+    font-size: 23px;
+    margin-left: 10px;
+}
+.userPart2{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: space-around;
+    font-size: 23px;
+    margin-left: 10px;
+}
+.editProfileDiv{
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #74B49B;
+    cursor: pointer;
+}
+.editProfileIcon{
+    font-size: 25px;
+    margin-left: 10px;
+}
+.editProfileParentDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userNameSpan, .userLastnameSpan, .emailSpan, .phoneSpan{
+    border-bottom: 2px solid #212B27;
+    width: 75%;
+    height: 35px;
 }

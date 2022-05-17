@@ -8,6 +8,8 @@ const notificationRoute = require('./routes/notifications');
 const authRoute = require('./routes/auth');
 const temperatureRoute = require('./routes/temperature');
 const greenhouseRoute = require('./routes/greenhouse');
+const userRoute = require('./routes/users');
+
 const app = express();
 app.use(express.json());
 
@@ -23,6 +25,7 @@ app.use('/api/notification', notificationRoute);
 app.use('/api/auth', authRoute); 
 app.use('/api/temperature', temperatureRoute);
 app.use('/api/greenhouse', greenhouseRoute);
+app.use('/api/user/',userRoute);
 
 app.listen(8000,()=>{
     console.log("Server is active at port 8000"); 
