@@ -12,13 +12,22 @@ import TextField from '@mui/material/TextField';
 
 export default function UserSettings() {
   const [open, setOpen] = useState(false);
-  
+  const [user,setUser] = useState([]);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
       setOpen(false);
   };
+  useEffect(()=>{
+    try{
+        setUser(JSON.parse(localStorage.getItem('user')));
+    }catch(err){
+
+    };
+  },[]); 
+  
   return (
     <div className='userSettings'>
         <div className='profileImageDiv'>
