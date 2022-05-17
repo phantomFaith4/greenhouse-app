@@ -9,29 +9,25 @@ import { useState, useEffect} from 'react';
 
 export default function Home() {
     const [user,setUser] = useState([]);
-    const [location, setLocation] = useState('Multiverse');
-    useEffect(()=>{
-        setUser(JSON.parse(localStorage.getItem('user')));
-    },[]); 
-    //console.log("Home local storage=> ",user); 
-    const getName = (location) =>{
+    const [location, setLocation] = useState('green1');
+    const getName = async (location) =>{
         setLocation(location);
     }
+    useEffect(()=>{
+        try{
+            setUser(JSON.parse(localStorage.getItem('user')));
+        }catch(err){
+
+        };
+    },[]); 
+    //console.log("Home local storage=> ",user); 
     return (
         <div className='home'> 
             <Sidebar />
             <Topbar getData={getName} />
             <div className='homeComponentsDiv'>
                 <TemperatureComponent loc={location} />
-                <TemperatureComponent />
-                <TemperatureComponent />
-                <TemperatureComponent />
                 <NotificationComponent />
-                <TemperatureComponent /> 
-                <TemperatureComponent />
-                <TemperatureComponent />
-                <TemperatureComponent />
-                <TemperatureComponent />
             </div>
         </div>
     );
