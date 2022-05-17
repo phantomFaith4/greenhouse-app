@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema(
             required:false,
             default:'',
         },
+        phone:{
+            type:String,
+            required:false,
+            default:'',
+        },
         lastname:{
             type:String,
             required:false,
