@@ -2,12 +2,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    flex-flow: column;
+}
+.addIcon{
+    font-size: 45px;
+    color: #74B49B;
+    border: 4px solid black;
+    border-radius: 50%;
+    cursor: pointer;
 }
 .greenhouseContainer{
-    border: 2px solid red;
     width: 1000px;
-    height: 365px;
+    height: auto;
     flex: 1 1 auto;
+    margin-bottom: 15px;
 }
 .tg , td , tr , th{
     border: 2px solid black;
