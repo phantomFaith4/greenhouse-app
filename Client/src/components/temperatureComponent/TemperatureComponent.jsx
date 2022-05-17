@@ -10,7 +10,6 @@ import Alert from '@mui/material/Alert';
 export default function TemperatureComponent({loc}) {
   const [value, setValue] = useState(33);
   const [auto,setAuto] = useState(false);
-  const [location,setLocation] = useState('test');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event, newValue) => {
@@ -39,11 +38,15 @@ export default function TemperatureComponent({loc}) {
     }
   }; 
   useEffect(()=>{
-    try{
-
-    }catch(err){
-      console.log(err);
-    }
+    const put = async () =>{
+      try{
+        const res = await axios.put('api/temperature/green2');
+        console.log(res.data.location);
+      }catch(err){   
+        console.log(err);
+      }
+    };
+    put();
   },[]);
   return (
     <div className='temperatureComponent'>

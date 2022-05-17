@@ -18,7 +18,7 @@ mongoose
   .then(console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
-app.use('/api/notification',notificationRoute);
+app.use('/api/notification',notificationRoute); 
 app.use('/api/auth',authRoute); 
 app.use('/api/temperature',temperatureRoute);
 
