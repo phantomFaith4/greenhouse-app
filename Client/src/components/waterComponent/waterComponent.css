@@ -1,0 +1,33 @@
+.waterComponent{
+    width: 310px;
+    height: 310px;
+    border: 2px solid black;
+    margin: 10px;
+    background-color: white;
+}
+.widgetTitleWater{
+    font-size: 30px;
+    margin-top: 10px;
+}
+.contentWater{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.waterButtonDiv{
+    display: flex;
+    flex-direction: column;
+}
+.waterButtonDiv1{
+    height: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.waterButtonDiv2{
+    height: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 75px;
+}

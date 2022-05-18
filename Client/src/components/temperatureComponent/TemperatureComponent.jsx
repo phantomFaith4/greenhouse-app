@@ -75,8 +75,10 @@ export default function TemperatureComponent({loc}) {
     <div className='temperatureComponent'>
           <div className='content'>
             <span className='widgetTitle'>TEMPERATURE</span>
-            <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp } onChange={handleChange}/>
-            <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
+            <div className='temperatureWidgetDiv'>
+              <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp } onChange={handleChange}/>
+              <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
+            </div>
             <span className='temperatureValue'>{value}°C</span>
           {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div> 

@@ -1,9 +1,11 @@
 import React from 'react';
+import './home.css';
 import Sidebar from '../../components/sidebarComponent/Sidebar';
 import Topbar from '../../components/topbarComponent/Topbar';
 import TemperatureComponent from '../../components/temperatureComponent/TemperatureComponent';
-import './home.css';
 import NotificationComponent from '../../components/notificationComponent/NotificationComponent';
+import WaterComponent from '../../components/waterComponent/WaterComponent';
+
 import { useState, useEffect} from 'react';
 
 export default function Home() {
@@ -26,6 +28,7 @@ export default function Home() {
             <div className='homeComponentsDiv'>
                 <TemperatureComponent loc={location} />
                 <NotificationComponent loc={location} />
+                <WaterComponent />
             </div>
         </div>
     );
