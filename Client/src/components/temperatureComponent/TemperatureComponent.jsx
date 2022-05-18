@@ -68,7 +68,7 @@ export default function TemperatureComponent({loc}) {
         setUpdate(false); 
       }
     } 
-    fetch();
+    fetch(); 
   },[loc]);
 
   return (
