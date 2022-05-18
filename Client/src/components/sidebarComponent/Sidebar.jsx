@@ -14,7 +14,7 @@ export default function Sidebar() {
             <div className='greenhousePartSidebar'>
                 <i className="sidebarIcon fas fa-tint"></i>
                 <i className="sidebarIcon fas fa-faucet"></i>
-                <i className="sidebarIcon fas fa-thermometer-half"></i>
+                <Link to='/temperature'><i className="sidebarIcon fas fa-thermometer-half"></i></Link>
                 <i className="sidebarIcon fas fa-lightbulb"></i>
             </div> 
             <div className='logoutPartSidebar'>

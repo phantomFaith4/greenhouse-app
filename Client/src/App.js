@@ -8,6 +8,7 @@ import {
 import Account from "./pages/accountPage/Account";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import NotificationPage from "./pages/notificationPage/NotificationPage";
+import TemperaturePage from "./pages/temperaturePage/TemperaturePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/" element={<Login />} />
           <Route path="/notifications" element={<NotificationPage />} /> 
+          <Route path="/temperature" element={<TemperaturePage />} /> 
           <Route path='*' element={<ErrorPage />} /> 
         </Routes>
       </BrowserRouter>,

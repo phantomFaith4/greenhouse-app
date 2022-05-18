@@ -8,10 +8,11 @@ const TemperatureSchema = new mongoose.Schema({
     location:{
         type:String,
         required:true,
+        unique:true,
     },  
     automatic:{ 
         type:Boolean, 
-        default:false,
+        default:false, 
     },
 },
 {timestamps:true},

@@ -8,6 +8,7 @@ const WaterSchema = new mongoose.Schema({
     location:{ 
         type:String,
         required:true,
+        unique:true,
     },
     automatic:{
         type:Boolean, 

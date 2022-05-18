@@ -5,12 +5,20 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import {useState, useEffect } from 'react';
 
-export default function WaterComponent() {
+export default function WaterComponent({loc}) { 
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(()=>{
-    
+  useEffect(()=>{ 
+    const fetch = async()=>{
+      try{
+        const res = await axios.get(`/api/water/green5`);
+        console.log("RES WATER=>",res);
+      }catch(err){
+        console.log(err);
+      }
+    };
+    fetch();
   },[]);
 
   return (

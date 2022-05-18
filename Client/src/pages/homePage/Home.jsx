@@ -28,7 +28,7 @@ export default function Home() {
             <div className='homeComponentsDiv'>
                 <TemperatureComponent loc={location} />
                 <NotificationComponent loc={location} />
-                <WaterComponent />
+                <WaterComponent loc={location} />
             </div>
         </div>
     );
