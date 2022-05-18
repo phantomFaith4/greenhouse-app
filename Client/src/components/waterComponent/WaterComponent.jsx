@@ -9,6 +9,10 @@ export default function WaterComponent() {
 
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(()=>{
+    
+  },[]);
+
   return (
     <div className='waterComponent'>
       <div className='contentWater'>
