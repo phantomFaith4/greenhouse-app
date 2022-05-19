@@ -6,7 +6,16 @@ import Topbar from '../../components/topbarComponent/Topbar';
 import Sidebar from '../../components/sidebarComponent/Sidebar';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
+import TimeKeeper from 'react-timekeeper';
 
+import DatePicker from 'sassy-datepicker';
+
+
+import Calendar from '@lls/react-light-calendar';
+import '@lls/react-light-calendar/dist/index.css';
+
+
+ 
 export default function TemperaturePage() {
 
     const [value, setValue] = useState(33);
@@ -15,6 +24,7 @@ export default function TemperaturePage() {
     const [button ,setButton] = useState('OFF');
     const [weather, setWeather] = useState(''); 
     const [dateTime, setDateTime] = useState('');
+    const [time, setTime] = useState('12:34pm') 
 
     const getDateTime = ()=>{
       const today = new Date();
@@ -23,6 +33,9 @@ export default function TemperaturePage() {
       const dateTime = date+' '+time;
       setDateTime(dateTime);
     }
+    const onChangeDate = (date) => {
+      console.log(date.toString());
+    };
     const handleChange = (event, newValue) => {
         setValue(newValue); 
       }; 
@@ -32,7 +45,7 @@ export default function TemperaturePage() {
           setButton('ON');
         }else{
           setAuto(false);
-          setButton('OFF');
+          setButton('OFF'); 
         }
       } 
       useEffect(()=>{
@@ -48,7 +61,7 @@ export default function TemperaturePage() {
     <div className='temperaturePage'>
         <Topbar />
         <Sidebar />
-        <div className="containerTemperaturePage">
+        <div className="containerTemperaturePage">  
             <div className='leftSideTemperaturePage'>
                 <div className='leftUpTemperatuePage'>
                     <div className='slideButtonHolderTemperaturePage'>
@@ -72,16 +85,21 @@ export default function TemperaturePage() {
                         <span>Vlaznost: {weather ? weather.main.humidity : 'NaN'} %</span>
                       </div>
                       <div className='weatherDataLocationDiv'>
-                          <i className="locationIcon fa-solid fa-location-dot"></i><span>Lokacija: {weather ? weather.name : 'NaN'}, {weather ? weather.sys.country : 'NaN'}</span>
+                          <i className="locationIcon fa-solid fa-location-dot"></i><span>{weather ? weather.name : 'NaN'}, {weather ? weather.sys.country : 'NaN'}</span>
                       </div>
                      </div>
                    </div>
                 </div>
-            </div>
-            <div className='rightSideTemperaturePage'>
-                <h1>Right</h1>
+            </div> 
+            <div className='rightSideTemperaturePage'> 
+                <div className='timeHolderDiv'>
+                  <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
+                </div> 
+                <div className='dateHolderDiv'>
+                   <DatePicker onChange={onChangeDate} />
+                </div>  
             </div>
         </div>
-    </div>
-  )
-}
+    </div> 
+  ) 
+} 
