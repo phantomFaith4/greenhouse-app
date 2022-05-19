@@ -13,9 +13,7 @@ export default function TemperaturePage() {
     const [auto,setAuto] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [button ,setButton] = useState('OFF');
-
-    const [lati, setLati] = useState('');
-    const [long, setLong] = useState('');
+    const [weather, setWeather] = useState(''); 
 
     const handleChange = (event, newValue) => {
         setValue(newValue); 
@@ -30,18 +28,12 @@ export default function TemperaturePage() {
         }
       } 
       useEffect(()=>{
-        navigator.geolocation.getCurrentPosition(function(position) {
-           // console.log("Latitude is :", position.coords.latitude);
-            //console.log("Longitude is :", position.coords.longitude);
-            //
-            setLong(position.coords.longitude);
-            setLati(position.coords.latitude)
-          });
-          const fetch = async ()=>{
-            const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=zenica&APPID=a162899aba020d546d71f3f6256ebc72`);
-            console.log(res);
-        };
-          fetch();
+          const getWeather = async ()=>{
+            const res = await axios.get(`/api/weather/${'Mostar'}`);
+            setWeather(res.data);
+            console.log(res.data);
+        };  
+        getWeather();
       },[])
   return (
     <div className='temperaturePage'>
@@ -61,7 +53,11 @@ export default function TemperaturePage() {
                     </div>
                 </div>
                 <div className='leftDownTemperatuePage'>
-                    <h1>Down</h1>
+                   <div className='weatherWidget'>
+                        <span>Lokacija: {weather ? weather.name : 'NaN'}</span>
+                        <span>Vlaznost: {weather ? weather.main.humidity : 'NaN'} %</span>
+                        <span>Temperatura: {weather ? Math.round(weather.main.temp)+' °C' : 'NaN'}</span>
+                   </div>
                 </div>
             </div>
             <div className='rightSideTemperaturePage'>
