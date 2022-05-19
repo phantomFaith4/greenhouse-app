@@ -14,7 +14,15 @@ export default function TemperaturePage() {
     const [errorMessage, setErrorMessage] = useState('');
     const [button ,setButton] = useState('OFF');
     const [weather, setWeather] = useState(''); 
+    const [dateTime, setDateTime] = useState('');
 
+    const getDateTime = ()=>{
+      const today = new Date();
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes();
+      const dateTime = date+' '+time;
+      setDateTime(dateTime);
+    }
     const handleChange = (event, newValue) => {
         setValue(newValue); 
       }; 
@@ -34,6 +42,7 @@ export default function TemperaturePage() {
             console.log(res.data);
         };  
         getWeather();
+        getDateTime();
       },[])
   return (
     <div className='temperaturePage'>
@@ -54,9 +63,18 @@ export default function TemperaturePage() {
                 </div>
                 <div className='leftDownTemperatuePage'>
                    <div className='weatherWidget'>
-                        <span>Lokacija: {weather ? weather.name : 'NaN'}</span>
+                     <div className='temperatureValueDiv'>
+                        <span className='temperatureWidgetValue'>{weather ? Math.round(weather.main.temp)+' °C' : 'NaN'}</span>
+                     </div>
+                     <div className='humidityLocationDiv'>
+                      <div>
+                        <p>{dateTime}</p>
                         <span>Vlaznost: {weather ? weather.main.humidity : 'NaN'} %</span>
-                        <span>Temperatura: {weather ? Math.round(weather.main.temp)+' °C' : 'NaN'}</span>
+                      </div>
+                      <div className='weatherDataLocationDiv'>
+                          <i className="locationIcon fa-solid fa-location-dot"></i><span>Lokacija: {weather ? weather.name : 'NaN'}, {weather ? weather.sys.country : 'NaN'}</span>
+                      </div>
+                     </div>
                    </div>
                 </div>
             </div>

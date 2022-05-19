@@ -4,15 +4,16 @@
     display: flex;
     align-items: center;
 }
+
 .containerTemperaturePage{
     width: 100%;
     height: calc(100vh - 75px);
-    border: 2px solid black;
     flex: 1;
     margin-top: 30px;
     display: flex;
 
 }
+
 .leftSideTemperaturePage{
     flex: 1;
     display: flex;
@@ -20,31 +21,36 @@
     justify-content: space-around;
     flex-flow: column;
 }
+
 .rightSideTemperaturePage{
     flex:1;
-}
-.leftUpTemperatuePage{
     border: 2px solid red;
+}
+
+.leftUpTemperatuePage{
     width: 100%;
     height: 100vh;
 }
+
 .leftDownTemperatuePage{
-    border: 2px solid blue;
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .slideButtonHolderTemperaturePage{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     margin: 50px 25px 25px 25px;
 }
+
 .spacer{
     margin: 25px;
 }
+
 .textHolderTemperaturePage{
     margin: 25px;
     display: flex;
@@ -52,6 +58,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
 .temperatureTextTempPage{
     font-size: 25px;
     margin-bottom: 50px;
@@ -63,6 +70,38 @@
 .weatherWidget{
     width: 80%;
     height: 30vh;
-    border: 5px solid black;
+    border: 5px solid #74B49B;;
     border-radius: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.temperatureWidgetValue{
+    font-size: 75px;
+}
+
+.humidityLocationDiv{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    font-size: 23px;
+}
+
+.temperatureValueDiv{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.locationIcon{
+    margin-right: 10px;
+    color: #74B49B;
+}
+
+.weatherIcon{
+    width: 50px;
+    height: 50px;
 }
