@@ -27,7 +27,7 @@ export default function TemperaturePage() {
         setValue(newValue); 
       }; 
       const handleButton = () =>{
-        if(auto===false){
+        if(auto===false){ 
           setAuto(true);
           setButton('ON');
         }else{
