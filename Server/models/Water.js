@@ -25,6 +25,10 @@ const WaterSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    run:{
+        type: Boolean,
+        default:false,
+    }
 },
 {timestamps:true}
 );

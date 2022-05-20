@@ -11,7 +11,8 @@ const greenhouseRoute = require('./routes/greenhouse');
 const userRoute = require('./routes/users');
 const waterRoute = require('./routes/water');
 const weatherRoute = require('./routes/weather');
-
+const lightRoute = require('./routes/light');
+const co2Route = require('./routes/co2');
 
 const app = express();
 app.use(express.json());
@@ -31,7 +32,8 @@ app.use('/api/greenhouse', greenhouseRoute);
 app.use('/api/user/', userRoute);
 app.use('/api/water/', waterRoute);
 app.use('/api/weather/', weatherRoute);
-
+app.use('/api/light/', lightRoute);
+app.use('/api/co2/', co2Route);
 
 
 
