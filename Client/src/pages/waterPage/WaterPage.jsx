@@ -37,7 +37,10 @@ export default function WaterPage() {
     }
   } 
   useEffect(()=>{
- 
+    const fetch = async ()=>{
+
+    };
+    fetch();
   },[]);
   return (
     <div className='waterPage'>

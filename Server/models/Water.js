@@ -16,6 +16,13 @@ const WaterSchema = new mongoose.Schema({
     },
     water:{
         type:Boolean, 
+        default:false, 
+    },
+    amount:{
+        type:Number,
+    },
+    fertilizer:{
+        type:Boolean,
         default:false,
     },
 },

@@ -28,6 +28,8 @@ router.post('/new', async(req,res)=>{
             location: req.body.location,
             automatic: req.body.automatic,
             water: req.body.water,
+            amount:req.body.amount,
+            fertilizer:req.body.fertilizer,
         });
         const water  = newWater.save();
         res.status(200).json(water);
@@ -44,6 +46,8 @@ router.put('/:location', async(req,res)=>{
             location: req.body.location,
             automatic: req.body.automatic,
             water: req.body.water,
+            amount:req.body.amount,
+            fertilizer:req.body.fertilizer,
         }
         try{
             const water = await Water.findOneAndUpdate(location,updateWater,{
