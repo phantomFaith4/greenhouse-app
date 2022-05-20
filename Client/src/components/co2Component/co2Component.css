@@ -1,14 +1,8 @@
-.lightComponent{
+.co2Component{
     width: 310px;
     height: 310px;
     border: 5px solid #74B49B;
     border-radius: 15px;
     margin: 10px;
     background-color: white;
-}
-
-.ligtComponentButtonsDiv{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }

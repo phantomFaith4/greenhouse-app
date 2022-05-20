@@ -12,6 +12,7 @@ import TemperaturePage from "./pages/temperaturePage/TemperaturePage";
 import WaterPage from "./pages/waterPage/WaterPage";
 import HumidityPage from "./pages/humidityPage/HumidityPage";
 import LightPage from "./pages/lightPage/LightPage";
+import CO2Page from './pages/co2Page/CO2Page';
 
 function App() {
   return (
@@ -26,9 +27,10 @@ function App() {
           <Route path="/water" element={<WaterPage />} />
           <Route path="/humidity" element={<HumidityPage />} />
           <Route path="/light" element={<LightPage />} />
+          <Route path="/co2" element={<CO2Page />} />
           <Route path='*' element={<ErrorPage />} /> 
         </Routes>
-      </BrowserRouter>,
+      </BrowserRouter>
     </div>
   );
 }

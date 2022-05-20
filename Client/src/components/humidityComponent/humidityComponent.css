@@ -1,4 +1,4 @@
-.lightComponent{
+.humiditiyComponent{
     width: 310px;
     height: 310px;
     border: 5px solid #74B49B;
@@ -6,9 +6,12 @@
     margin: 10px;
     background-color: white;
 }
-
-.ligtComponentButtonsDiv{
+.content{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
+}
+.widgetTitleHumidity{
+    text-align: center;
+    font-size: 35px;
 }

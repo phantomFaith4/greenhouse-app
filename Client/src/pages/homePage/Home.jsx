@@ -7,6 +7,9 @@ import NotificationComponent from '../../components/notificationComponent/Notifi
 import WaterComponent from '../../components/waterComponent/WaterComponent';
 
 import { useState, useEffect} from 'react';
+import HumidityComponent from '../../components/humidityComponent/HumidityComponent';
+import LightComponent from '../../components/lightComponent/LightComponent';
+import CO2Component from '../../components/co2Component/CO2Component';
 
 export default function Home() {
     const [user,setUser] = useState([]);
@@ -27,8 +30,11 @@ export default function Home() {
             <Topbar getData={getName} />
             <div className='homeComponentsDiv'>
                 <TemperatureComponent loc={location} />
-                <NotificationComponent loc={location} />
                 <WaterComponent loc={location} />
+                <NotificationComponent loc={location} />
+                <HumidityComponent loc={location} />
+                <LightComponent loc={location} />
+                <CO2Component loc={location} />
             </div>
         </div>
     );
