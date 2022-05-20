@@ -12,10 +12,10 @@ export default function Sidebar() {
                 <Link to='/notifications'><i className="sidebarIcon fas fa-bell"></i></Link>
             </div>
             <div className='greenhousePartSidebar'>
-                <i className="sidebarIcon fas fa-tint"></i>
-                <i className="sidebarIcon fas fa-faucet"></i>
+                <Link to='/humidity'><i className="sidebarIcon fas fa-tint"></i> </Link>
+                <Link to='/water'><i className="sidebarIcon fas fa-faucet"></i></Link>
                 <Link to='/temperature'><i className="sidebarIcon fas fa-thermometer-half"></i></Link>
-                <i className="sidebarIcon fas fa-lightbulb"></i>
+                <Link to='/light'><i className="sidebarIcon fas fa-lightbulb"></i></Link>
             </div> 
             <div className='logoutPartSidebar'>
                 <i className="sidebarIcon fas fa-sign-out-alt"></i>

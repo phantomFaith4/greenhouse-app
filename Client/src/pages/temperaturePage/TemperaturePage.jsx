@@ -7,15 +7,9 @@ import Sidebar from '../../components/sidebarComponent/Sidebar';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TimeKeeper from 'react-timekeeper';
-
 import DatePicker from 'sassy-datepicker';
 
 
-import Calendar from '@lls/react-light-calendar';
-import '@lls/react-light-calendar/dist/index.css';
-
-
- 
 export default function TemperaturePage() {
 
     const [value, setValue] = useState(33);
@@ -36,6 +30,7 @@ export default function TemperaturePage() {
     const onChangeDate = (date) => {
       console.log(date.toString());
     };
+    
     const handleChange = (event, newValue) => {
         setValue(newValue); 
       }; 
@@ -70,7 +65,7 @@ export default function TemperaturePage() {
                         <Button onClick={handleButton} variant="contained">AUTO  {button}</Button>
                     </div>
                     <div className='textHolderTemperaturePage'>
-                        <span className='temperatureTextTempPage'>Temperature inside greenhouse : {'Green1'} is</span>
+                        <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
                         <span className='temperatureValueTempPage'>{'33'} °C</span>
                     </div>
                 </div>
@@ -80,9 +75,9 @@ export default function TemperaturePage() {
                         <span className='temperatureWidgetValue'>{weather ? Math.round(weather.main.temp)+' °C' : 'NaN'}</span>
                      </div>
                      <div className='humidityLocationDiv'>
-                      <div>
-                        <p>{dateTime}</p>
-                        <span>Vlaznost: {weather ? weather.main.humidity : 'NaN'} %</span>
+                      <div>  
+                        <p className='dateTimePara'>{dateTime}</p>
+                        <i class="humidityIcon fa-solid fa-droplet"></i><span>{weather ? weather.main.humidity : 'NaN'} %</span>
                       </div>
                       <div className='weatherDataLocationDiv'>
                           <i className="locationIcon fa-solid fa-location-dot"></i><span>{weather ? weather.name : 'NaN'}, {weather ? weather.sys.country : 'NaN'}</span>

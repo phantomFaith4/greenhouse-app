@@ -1,0 +1,64 @@
+.waterPage{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.waterPageContaier{
+    width: 100%;
+    height: calc(100vh - 75px);
+    flex: 1;
+    margin-top: 30px;
+    display: flex;
+}
+.leftSideWaterPage{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: column;
+}
+.rightSideWaterPage{
+    flex:1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.leftUpWaterPage{
+    width: 80%;
+    height: 100vh;
+    background-color: #74B49B;
+    margin-left: 50px;
+    margin-top: 25px;
+    border-radius: 25px;
+}
+.leftDownWaterPage{
+    width: 100%;
+    height: 100vh;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.waterPageSliderAndSwitchDiv{
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+.waterPageButtonDiv{
+    margin-left: 25px;
+}
+.waterTextWaterPage{
+    font-size: 23px;
+}
+.waterValueWaterPage{
+    font-size: 75px;
+}
+.textHolderWaterPage{
+    margin: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
