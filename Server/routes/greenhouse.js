@@ -17,12 +17,14 @@ router.put('/', async(req,res)=>{
 
 router.post('/new', async(req,res)=>{
     const nameOfGreenhouse = req.body.name;
+    const locationOfGreenhouse = req.body.location;
     const contentOfGreenhouse = req.body.content;
     const descriptionOfGreenhouse = req.body.description;
     const sizeOfGreenhouse = req.body.size;
     try{
         const newGreenhouse = new Greenhouse({
             name : nameOfGreenhouse,
+            location: locationOfGreenhouse,
             content : contentOfGreenhouse,
             description : descriptionOfGreenhouse,
             size : sizeOfGreenhouse,
@@ -33,7 +35,6 @@ router.post('/new', async(req,res)=>{
         res.status(400).json(err);
     }
 });
-
 router.delete('/:id',async(req,res)=>{
     const id = req.params.id;
     try{

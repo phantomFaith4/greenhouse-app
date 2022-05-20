@@ -12,13 +12,13 @@ const GreenhouseSchema = new mongoose.Schema({
         },
         description:{
             type:String,
-            required:false,
+            required:false, 
         },
         size:{ 
             type:String,
             required:false,
         },
-        city:{
+        location:{
             type:String,
         }
     },

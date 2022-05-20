@@ -19,6 +19,7 @@ export default function GreenhouseSettingsComponent() {
     const [content,setContent] = useState('')
     const [description,setDescription] = useState('')
     const [size,setSize] = useState('')
+    const [location,setLocation] = useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,6 +45,7 @@ export default function GreenhouseSettingsComponent() {
         try{
             const res = await axios.post(`/api/greenhouse/new`,{
                 name: name,
+                location: location,
                 content: content,
                 description: description,
                 size: size,
@@ -77,21 +79,23 @@ export default function GreenhouseSettingsComponent() {
                 <tbody>
                 <tr>
                     <td className="tg-0lax">Name</td>
+                    <td className="tg-0lax">Location</td>
                     <td className="tg-0lax">Content</td>
                     <td className="tg-0lax">Description</td>
                     <td className="tg-0lax">Size</td>
                     <td className="tg-0lax"></td>
                 </tr>
-                {
+                { 
                 greenhouse.map(g => 
                         (
                         <>
                             <tr>
                                 <td className="tg-0lax">{g.name}</td>
+                                <td className="tg-0lax">{g.location}</td>
                                 <td className="tg-0lax">{g.content}</td> 
                                 <td className="tg-0lax">{g.description}</td>
                                 <td className="tg-0lax">{g.size}</td>
-                                <td className="tg-0lax">
+                                <td  style={{width:"35px"}} className="tg-0lax">
                                     <i onClick={handleClickOpen}  className="deleteIcon fa-solid fa-trash-can"></i>
                                 </td>
                             </tr>
@@ -127,6 +131,7 @@ export default function GreenhouseSettingsComponent() {
                         Fill information about Greenhouse you want to add
                     </DialogContentText>
                         <TextField onChange={(e)=>setName(e.target.value)} autoFocus margin="dense" id="name" label="Name of greenhouse" type="text" fullWidth variant="standard" />
+                        <TextField onChange={(e)=>setLocation(e.target.value)} autoFocus margin="dense" id="location" label="Location of greenhouse" type="text" fullWidth variant="standard" />
                         <TextField onChange={(e)=>setContent(e.target.value)} autoFocus margin="dense" id="content" label="Content of greenhouse" type="text" fullWidth variant="standard" />
                         <TextField onChange={(e)=>setDescription(e.target.value)} autoFocus margin="dense" id="description" label="Description of greenhouse" type="text" fullWidth variant="standard" />
                         <TextField onChange={(e)=>setSize(e.target.value)} autoFocus margin="dense" id="size" label="Size of greenhouse" type="text" fullWidth variant="standard" />

@@ -1,15 +1,25 @@
 import React from 'react';
 import './topbar.css';
-import {useState } from 'react';
+import {useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Topbar(props) {
-  return ( 
+    const [greenhouse,setGreenhouse] = useState([]);
+    
+    useEffect(()=>{
+        const fetch = async ()=>{
+            const res = await axios.get('/api/greenhouse/all');
+            console.log("Topbar=>",res);
+            setGreenhouse(res.data);
+        };
+        fetch();
+    },[]);
+    return ( 
         <div className='topbar'> 
             <select name="greenhouse" onChange={(e)=>props.getData(e.target.value)} id="greenhouses">
-                <option value="green1">Green 1</option>
-                <option value="green2">Green 2</option>
-                <option value="green3">Green 3</option>
-                <option value="green4">Green 4</option>
+                {greenhouse.map(g => (
+                     <option value={g.name}>{g.name}</option>
+                ))}  
             </select>
         </div>
     );
