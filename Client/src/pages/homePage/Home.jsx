@@ -12,18 +12,10 @@ import LightComponent from '../../components/lightComponent/LightComponent';
 import CO2Component from '../../components/co2Component/CO2Component';
 
 export default function Home() {
-    const [user,setUser] = useState([]);
     const [location, setLocation] = useState('green1');
     const getName = async (location) =>{
         setLocation(location);
     }
-    useEffect(()=>{
-        try{
-            setUser(JSON.parse(localStorage.getItem('user')));
-        }catch(err){
-
-        };
-    },[]); 
     return (
         <div className='home'> 
             <Sidebar />

@@ -47,7 +47,9 @@ export default function CO2Page() {
             </div>
             <div className='textHolderWaterPage'>
               <span className='waterTextWaterPage'>Fan speed in  <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-              <span className='waterValueWaterPage'>{'33'} rpm</span>
+              <span className='waterValueWaterPage'>{value} rpm</span>
+              <span className='waterTextWaterPage'>Amount of CO2 inside <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
+              <span className='waterValueWaterPage'>{'600'} ppm</span>
             </div>
           </div>
           <div className='leftSideDownCO2Page'>

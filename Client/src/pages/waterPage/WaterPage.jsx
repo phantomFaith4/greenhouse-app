@@ -57,14 +57,14 @@ export default function WaterPage() {
                         </div>
                         <div className='textHolderWaterPage'>
                           <span className='waterTextWaterPage'>Amount of water going through tubes in <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-                          <span className='waterValueWaterPage'>{'33'} ml/s</span>
+                          <span className='waterValueWaterPage'>{value} ml/s</span>
                           <span className='waterTextWaterPage'>and soil moisture is at</span>
-                          <span className='waterValueWaterPage'>{'33'} %</span>
+                          <span className='waterValueWaterPage'>{'75'} %</span>
                         </div>
                    </div>
                 </div>
                 <div className='leftDownWaterPage'>
-                  <h1>leftDown</h1>
+                  
                 </div>
             </div> 
             <div className='rightSideWaterPage'> 

@@ -55,11 +55,11 @@ export default function LightPage() {
             </div>
             <div className='textHolderTemperaturePage'>
               <span className='lightTextLightPage'>Light intensity inside greenhouse : <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-              <span className='temperatureValueTempPage'>{'33'} %</span>
+              <span className='temperatureValueTempPage'>{value} %</span>
             </div>
           </div>
           <div className='leftSideDownLightPage'>
-            <h1>HSF2</h1>
+            
           </div>
         </div>
         <div className='rightSideLigtPage'>

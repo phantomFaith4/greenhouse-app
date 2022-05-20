@@ -11,8 +11,14 @@ router.get('/all', async(req,res)=>{
     }
 });
 
-router.put('/', async(req,res)=>{
-
+router.get('/:location', async(req,res)=>{
+    const location = req.params.location;
+    try{
+        const greenhouse = await Greenhouse.findOne({name:location});
+        res.status(200).json(greenhouse);
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
 
 router.post('/new', async(req,res)=>{

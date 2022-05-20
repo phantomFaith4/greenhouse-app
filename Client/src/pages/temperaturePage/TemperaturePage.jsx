@@ -19,7 +19,11 @@ export default function TemperaturePage() {
     const [weather, setWeather] = useState(''); 
     const [dateTime, setDateTime] = useState('');
     const [time, setTime] = useState('12:34pm') 
-
+    const [location,setLocation] = useState('green1');
+    
+    const getName = async (location) =>{
+      setLocation(location);
+    }
     const getDateTime = ()=>{
       const today = new Date();
       const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -42,19 +46,31 @@ export default function TemperaturePage() {
           setAuto(false);
           setButton('OFF'); 
         }
-      } 
+      }  
+      const getWeather = async ()=>{
+        const loc = await axios.get(`/api/greenhouse/${location}`);
+        try{
+          const res = await axios.get(`/api/weather/${loc.data.location}`);
+          setWeather(res.data);
+        }catch(err){
+          console.log(err);
+        }
+    };  
       useEffect(()=>{
-          const getWeather = async ()=>{
-            const res = await axios.get(`/api/weather/${'Mostar'}`);
-            setWeather(res.data);
-            console.log(res.data);
-        };  
+        const fetch = async ()=>{
+          try{
+
+          }catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
         getWeather();
         getDateTime();
-      },[])
+      },[location])
   return (
     <div className='temperaturePage'>
-        <Topbar />
+        <Topbar getData={getName} />
         <Sidebar />
         <div className="containerTemperaturePage">  
             <div className='leftSideTemperaturePage'>
@@ -66,7 +82,7 @@ export default function TemperaturePage() {
                     </div>
                     <div className='textHolderTemperaturePage'>
                         <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-                        <span className='temperatureValueTempPage'>{'33'} °C</span>
+                        <span className='temperatureValueTempPage'>{value} °C</span>
                     </div>
                 </div>
                 <div className='leftDownTemperatuePage'>

@@ -20,10 +20,10 @@ export default function HumidityPage() {
         <div className="humidityPageContainer">
           <div className='leftSideHumidityPage'>
             <div className='leftUpHumidityPage'>
-              <h1>sasdasd</h1>
+              <h1>Empty Widget</h1>
             </div>
             <div className='leftDownHumidityPage'>
-                <h1>qqqqqqs</h1>
+                <h1>Empty Widget</h1>
             </div>
           </div>
           <div className='rightSideHumidityPage'>
