@@ -3,4 +3,44 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    background-color: #EFEFEF;
+}
+.humidityPageContainer{
+    width: 100%;
+    height: calc(100vh - 75px);
+    flex: 1;
+    margin-top: 30px;
+    display: flex;
+}
+.leftSideHumidityPage{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.leftUpHumidityPage{
+   border: 2px solid red;
+   width: 80%;
+   height: 100vh;
+   background-color: #74B49B;
+   margin-left: 50px;
+   margin-top: 25px;
+   border-radius: 25px; 
+}
+.leftDownHumidityPage{
+   border: 2px solid blue;
+   width: 80%;
+   height: 100vh;
+   background-color: #74B49B;
+   margin-left: 50px;
+   margin-top: 25px;
+   border-radius: 25px; 
+}
+.rightSideHumidityPage{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
 }

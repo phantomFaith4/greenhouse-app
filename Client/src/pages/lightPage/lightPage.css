@@ -3,4 +3,56 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    background-color: #EFEFEF;
+}
+.lightPageContainer{
+    width: 100%;
+    height: calc(100vh - 75px);
+    flex: 1;
+    margin-top: 30px;
+    display: flex;
+}
+.leftSideLigtPage{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.leftSideUpLightPage{
+    width: 80%;
+    height: 100vh;
+    background-color: #74B49B;
+    margin-left: 50px;
+    margin-top: 25px;
+    border-radius: 25px; 
+}
+.leftSideDownLightPage{
+    width: 80%;
+    height: 100vh;
+    background-color: #74B49B;
+    margin-left: 50px;
+    margin-top: 25px;
+    border-radius: 25px; 
+
+}
+.rightSideLigtPage{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.timeHolderDivLightPage, .dateHolderDivLightPage{
+    border: 5px solid #74B49B;
+    border-radius: 10px;
+}
+.lightTextLightPage{
+    text-align: center;
+    font-size: 23px;
+}
+.buttonHolderLightPageDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }

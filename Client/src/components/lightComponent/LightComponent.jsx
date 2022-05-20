@@ -19,6 +19,7 @@ export default function LightComponent() {
       setButton('OFF');
     }
   } 
+
   return (
     <div className='lightComponent'> 
       <div className='content'>
@@ -31,7 +32,7 @@ export default function LightComponent() {
             </div>
             <span className='temperatureValue'>{'50'} %</span>
           {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
-          </div> 
+          </div>  
     </div>
   )
 }
