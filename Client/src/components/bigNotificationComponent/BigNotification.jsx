@@ -1,14 +1,14 @@
 import React from 'react'
 import './bigNotification.css';
 
-export default function BigNotification() {
+export default function BigNotification({notification}) {
   return (
     <div className='bigNotification'>
        <p className='bigNotificationText'>
-         asdasdasdasdasdasdas
+        {notification ? notification.value : 'NaN'}
         </p> 
-        <span className='bigLocation'>greenhouse 13</span>
-        <span className='bigTime'>12.12.1212</span>
+        <span className='bigLocation'>{notification ? notification.location : 'NaN'}</span>
+        <span className='bigTime'>{notification ? notification.createdAt : 'NaN'}</span>
     </div>
   )
 }

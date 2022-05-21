@@ -80,7 +80,7 @@ export default function TemperatureComponent({loc}) {
               <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
             </div>
             <span className='temperatureValue'>{value}°C</span>
-          {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
+            {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div> 
     </div>
     ); 

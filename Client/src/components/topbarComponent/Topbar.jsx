@@ -4,11 +4,11 @@ import {useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Topbar(props) {
+    
     const [greenhouse,setGreenhouse] = useState([]);
     useEffect(()=>{
         const fetch = async ()=>{
             const res = await axios.get('/api/greenhouse/all');
-            console.log("Topbar=>",res);
             setGreenhouse(res.data);
         };
         fetch();

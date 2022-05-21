@@ -86,16 +86,6 @@
 .temperatureWidgetValue{
     font-size: 75px;
 }
-
-.humidityLocationDiv{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    font-size: 23px;
-}
-
 .temperatureValueDiv{
     flex: 1;
     display: flex;
@@ -116,10 +106,14 @@
     border: 5px solid #74B49B;
     border-radius: 10px;
 }
-.weatherDataLocationDiv{
-    margin-top: 10px;
+.humidityLocationDiv{
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: 23px;
 }
 .humidityIcon{
-    margin-left: 10px;
     margin-right: 10px;
 }

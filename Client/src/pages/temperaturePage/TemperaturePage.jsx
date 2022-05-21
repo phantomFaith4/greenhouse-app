@@ -21,6 +21,7 @@ export default function TemperaturePage() {
     const [time, setTime] = useState('12:34pm') 
     const [location,setLocation] = useState('green1');
     const [temp, setTemp] = useState('');
+    const [update, setUpdate] = useState(false);
 
     const getName = async (location) =>{
       setLocation(location);
@@ -56,14 +57,47 @@ export default function TemperaturePage() {
         }catch(err){
           console.log(err);
         }
+    };
+    const pushNewTemp = async () => {
+      try{
+        const res = await axios.post('/api/temperature/new',{
+          temperature:value,
+          location:location,
+          automatic:auto,  
+        });
+        setErrorMessage(`Temperature changed to : ${value} °C`);
+        setTimeout(()=> {
+          setErrorMessage()
+        }, 1000);
+      }catch(err){
+        console.log("Push new temperature ERROR=> ",err);
+      }
+    }; 
+    const updateTemp = async () =>{
+      try{
+        const res = await axios.put(`/api/temperature/${location}`,{
+          temperature: value,
+          automatic: auto, 
+        });
+        setErrorMessage(`Temperature updated to : ${value} °C`);
+        setTimeout(()=> {
+          setErrorMessage()
+        }, 1000);
+      }catch(err){   
+        console.log(err); 
+      }
     };  
       useEffect(()=>{
         const fetch = async ()=>{
           try{
             const res = await axios.get(`/api/temperature/${location}`);
             setTemp(res.data);
+            setUpdate(true);
+            setButton(res.data.automatic ? 'ON' : 'OFF');
+            console.log(res.data);
           }catch(err){
             console.log(err);
+            setUpdate(false);
           }
         };
         fetch();
@@ -78,7 +112,7 @@ export default function TemperaturePage() {
             <div className='leftSideTemperaturePage'>
                 <div className='leftUpTemperatuePage'>
                     <div className='slideButtonHolderTemperaturePage'>
-                        <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={''} onChange={handleChange}/>
+                        <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp} onChange={handleChange}/>
                         <div className='spacer'></div>
                         <Button onClick={handleButton} variant="contained">AUTO  {button}</Button>
                     </div>
@@ -93,7 +127,7 @@ export default function TemperaturePage() {
                         <span className='temperatureWidgetValue'>{weather ? Math.round(weather.main.temp)+' °C' : 'NaN'}</span>
                      </div>
                      <div className='humidityLocationDiv'>
-                      <div>  
+                      <div className='humidityDataDiv'>  
                         <p className='dateTimePara'>{dateTime}</p>
                         <i class="humidityIcon fa-solid fa-droplet"></i><span>{weather ? weather.main.humidity : 'NaN'} %</span>
                       </div>

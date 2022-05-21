@@ -6,11 +6,11 @@ const LightSchema = new mongoose.Schema({
         required: true,
         unique:true,
     },
-    intensitiy:{
+    intensity:{
         type: Number,
-    },
+    }, 
     automatic:{
-        type: Boolean,
+        type: Boolean, 
         default:false,
     },
     run:{
