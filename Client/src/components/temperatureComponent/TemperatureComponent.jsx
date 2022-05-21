@@ -47,7 +47,7 @@ export default function TemperatureComponent({loc}) {
         temperature: value,
         automatic: auto, 
       });
-      setErrorMessage(`Temperature changed to : ${value} °C`);
+      setErrorMessage(`Temperature updated to : ${value} °C`);
       setTimeout(()=> {
         setErrorMessage()
       }, 1000);
@@ -61,6 +61,7 @@ export default function TemperatureComponent({loc}) {
       try{
         const res = await axios.get(`/api/temperature/${loc}`);
         setValue(res.data.temperature);
+        setButton(res.data.automatic ? 'ON' : 'OFF');
         setUpdate(true);
       }catch(err){
         console.log(err);

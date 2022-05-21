@@ -8,7 +8,7 @@ router.get('/all', async(req,res)=>{
         res.status(200).json(water);
     }catch(err){
 
-    }
+    } 
 });
 
 router.get('/:location', async(req,res)=>{
@@ -30,7 +30,7 @@ router.post('/new', async(req,res)=>{
             water: req.body.water,
             amount:req.body.amount,
             fertilizer:req.body.fertilizer,
-        });
+        }); 
         const water  = newWater.save();
         res.status(200).json(water);
     }catch(err){
@@ -40,25 +40,24 @@ router.post('/new', async(req,res)=>{
 
 router.put('/:location', async(req,res)=>{
     try{
-        const location = req.params.location;
+        const filter = { location: req.params.location };
         const updateWater = {
             percentage: req.body.percentage,
-            location: req.body.location,
-            automatic: req.body.automatic,
+            automatic: req.body.automatic, 
             water: req.body.water,
             amount:req.body.amount,
-            fertilizer:req.body.fertilizer,
+            fertilizer:req.body.fertilizer,  
         }
-        try{
-            const water = await Water.findOneAndUpdate(location,updateWater,{
+        try{  
+            const water = await Water.findOneAndUpdate(filter,updateWater,{
                 new: true,
             });
             res.status(200).json(water);
         }catch(err){
-            res.status(403).json(err);
+            res.status(404).json(err);
         }
     }catch(err){
-        res.status(500).json(err);
+        res.status(400).json(err);
     } 
 });
 
