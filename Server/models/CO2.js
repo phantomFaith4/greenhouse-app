@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const CO2Schema = new mongoose.Schema({
-    fan:{
+    fan1:{
+        type: Boolean,
+        default: false,
+    },
+    fan2:{
         type: Boolean,
         default: false,
     },

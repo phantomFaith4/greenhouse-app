@@ -23,7 +23,8 @@ router.get('/:location', async(req,res)=>{
 router.post('/new', async(req,res)=>{
     try{
         const newCO2 = new CO2({
-            fan:req.body.fan,
+            fan1:req.body.fan2,
+            fan2:req.body.fan2,
             location:req.body.location,
             speed:req.body.speed,
             run:req.body.run,
@@ -35,8 +36,26 @@ router.post('/new', async(req,res)=>{
     }
 });
 
-router.put('/:location',async(req,res)=>{
-
+router.put('/:location', async(req,res)=>{
+    try{
+        const filter = {location: req.params.location};
+        const updateCO2 = {
+            fan1: req.body.fan1,
+            fan2: req.body.fan2,
+            speed: req.body.speed,
+            run: req.body.run,
+        }
+        try{
+            const co2 = await CO2.findOneAndUpdate(filter,updateCO2,{
+                new:true,
+            });
+            res.status(200).json(co2);
+        }catch(err){
+            res.status(404).json(err);
+        }
+    }catch(err){
+        res.status(200).json(err);
+    }
 });
 
 
