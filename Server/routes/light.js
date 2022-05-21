@@ -23,10 +23,10 @@ router.get('/:location', async(req,res)=>{
 router.post('/new', async(req,res)=>{
     try{
         const newLight = new Light({
-            location:req.body.location,
-            intensity:req.body.intensity,
-            automatic:req.body.automatic,
-            run:req.body.run,
+            location: req.body.location,
+            intensitiy: req.body.intensity,
+            automatic: req.body.automatic,
+            run: req.body.run,
         });
         const light = newLight.save();
         res.status(200).json(light);

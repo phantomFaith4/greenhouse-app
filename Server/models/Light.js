@@ -4,6 +4,7 @@ const LightSchema = new mongoose.Schema({
     location:{
         type: String,
         required: true,
+        unique:true,
     },
     intensitiy:{
         type: Number,

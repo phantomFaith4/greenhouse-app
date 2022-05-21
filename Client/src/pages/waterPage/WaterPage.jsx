@@ -20,7 +20,12 @@ export default function WaterPage() {
   const [button ,setButton] = useState('OFF');
   const [dateTime, setDateTime] = useState('');
   const [time, setTime] = useState('12:34pm') 
+  const [location, setLocation] = useState('green1');
+  const [water, setWater] = useState('');
 
+  const getName = async (location) =>{
+      setLocation(location);
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -38,13 +43,19 @@ export default function WaterPage() {
   } 
   useEffect(()=>{
     const fetch = async ()=>{
-
+      try{
+        const res = await axios.get(`/api/water/${location}`);
+        setWater(res.data);
+        setValue(res? res.data.amount : 0); 
+      }catch(err){
+        console.log(err);
+      }
     };
     fetch();
-  },[]);
+  },[location]);
   return (
     <div className='waterPage'>
-        <Topbar /> 
+        <Topbar getData={getName} /> 
         <Sidebar />
         <div className="waterPageContaier"> 
             <div className='leftSideWaterPage'> 
@@ -59,10 +70,10 @@ export default function WaterPage() {
                           <Button onClick={handleButton} variant="contained">AUTO  {button}</Button> 
                         </div>
                         <div className='textHolderWaterPage'>
-                          <span className='waterTextWaterPage'>Amount of water going through tubes in <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-                          <span className='waterValueWaterPage'>{value} ml/s</span>
+                          <span className='waterTextWaterPage'>Amount of water going through tubes in <span style={{fontWeight: "bold"}}>{water ? water.location : 'NaN'}</span> is</span>
+                          <span className='waterValueWaterPage'>{water ? water.amount : 'NaN'} ml/s</span>
                           <span className='waterTextWaterPage'>and soil moisture is at</span>
-                          <span className='waterValueWaterPage'>{'75'} %</span>
+                          <span className='waterValueWaterPage'>{water ? water.percentage : 'NaN'} %</span>
                         </div>
                    </div>
                 </div>

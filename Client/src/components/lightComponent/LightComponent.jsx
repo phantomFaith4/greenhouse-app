@@ -5,13 +5,13 @@ import {useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
-export default function LightComponent() {
+export default function LightComponent({loc}) {
   const [auto, setAuto] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
   const [button ,setButton] = useState('OFF');
   const [button2 ,setButton2] = useState('OFF');
   const [auto2, setAuto2] = useState(false);
-
+  const [light, setLight] = useState('');
   const handleButton = () =>{
     if(auto===false){
       setAuto(true);
@@ -30,7 +30,19 @@ export default function LightComponent() {
       setButton2('OFF');
     }
   } 
-
+  useEffect(()=>{ 
+    const fetch = async ()=>{
+      try{
+        const res = await axios.get(`/api/light/${loc}`);
+        setLight(res.data);
+        res.data.automatic ? setButton('ON') : setButton('OFF');
+        res.data.run ? setButton2('ON') : setButton2('OFF');
+      }catch(err){
+        console.log(err);
+      }
+    };
+    fetch();
+  },[loc]);
   return (
     <div className='lightComponent'> 
       <div className='content'>
@@ -41,7 +53,7 @@ export default function LightComponent() {
                 <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
               </div>
             </div>
-            <span className='temperatureValue'>{'50'} %</span>
+            <span className='temperatureValue'>{light ? light.intensitiy : 'NaN'} %</span>
           {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div>  
     </div>

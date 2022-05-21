@@ -61,7 +61,6 @@ export default function TemperatureComponent({loc}) {
       try{
         const res = await axios.get(`/api/temperature/${loc}`);
         setValue(res.data.temperature);
-        setAuto(res.data.automatic);
         setUpdate(true);
       }catch(err){
         console.log(err);

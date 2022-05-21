@@ -20,7 +20,8 @@ export default function TemperaturePage() {
     const [dateTime, setDateTime] = useState('');
     const [time, setTime] = useState('12:34pm') 
     const [location,setLocation] = useState('green1');
-    
+    const [temp, setTemp] = useState('');
+
     const getName = async (location) =>{
       setLocation(location);
     }
@@ -59,7 +60,8 @@ export default function TemperaturePage() {
       useEffect(()=>{
         const fetch = async ()=>{
           try{
-
+            const res = await axios.get(`/api/temperature/${location}`);
+            setTemp(res.data);
           }catch(err){
             console.log(err);
           }
@@ -81,8 +83,8 @@ export default function TemperaturePage() {
                         <Button onClick={handleButton} variant="contained">AUTO  {button}</Button>
                     </div>
                     <div className='textHolderTemperaturePage'>
-                        <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{'Green1'}</span> is</span>
-                        <span className='temperatureValueTempPage'>{value} °C</span>
+                        <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{temp ? temp.location : 'NaN'}</span> is</span>
+                        <span className='temperatureValueTempPage'>{temp ? temp.temperature : 'NaN'} °C</span>
                     </div>
                 </div>
                 <div className='leftDownTemperatuePage'>
