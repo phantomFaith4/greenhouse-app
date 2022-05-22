@@ -12,6 +12,7 @@ import FanComponent from '../../components/fanComponent/FanComponent';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
+import Button from '@mui/material/Button';
 
 export default function CO2Page() {
 
@@ -127,7 +128,7 @@ export default function CO2Page() {
             <div className='leftSideCO2Page'>
               <div className='leftSideUpCO2Page'>
                 <div className='buttonsHolderCO2PageDiv'>
-                  <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateCO2 : pushNewCO2} onChange={handleChange}/>
+                  <Slider value={value} aria-label="Default" valueLabelDisplay="auto" onChange={handleChange}/>
                   <div className='switchCO2PageDiv'>
                     <FormControlLabel value="start" control={<Switch checked={fan1} color="primary" />} label="Fan #1" labelPlacement="start"  onClick={handleSwitch1}/>
                     <FormControlLabel value="start" control={<Switch checked={fan2} color="primary" />} label="Fan #2" labelPlacement="start"  onClick={handleSwitch2}/>
@@ -138,6 +139,9 @@ export default function CO2Page() {
                   <span className='waterValueWaterPage'>{value} rpm</span>
                   <span className='waterTextWaterPage'>and amount of CO2 inside is</span>
                   <span className='waterValueWaterPage'>{'600'} ppm</span>
+                </div>
+                <div className='saveButton'>
+                  <Button onMouseUp={update ? updateCO2 : pushNewCO2} variant="contained">Save</Button>
                 </div>
                 {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
               </div>

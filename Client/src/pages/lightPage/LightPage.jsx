@@ -139,16 +139,19 @@ export default function LightPage() {
             <div className='leftSideLigtPage'>
               <div className='leftSideUpLightPage'>
                 <div className='slideButtonHolderTemperaturePage'>
-                  <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateLight : pushNewLight } onChange={handleChange}/>
+                  <Slider value={value} aria-label="Default" valueLabelDisplay="auto" onChange={handleChange}/>
                   <div className='spacer'></div>
                   <div className='buttonHolderLightPageDiv'>
                     <Button onClick={handleButton} variant="contained">TURN  {button}</Button>
-                    <Button onClick={handleButton2} variant="contained">AUTO  {button2}</Button>
+                    <Button onClick={handleButton2}  variant="contained">AUTO  {button2}</Button>
                   </div>
                 </div>
                 <div className='textHolderTemperaturePage'>
                   <span className='lightTextLightPage'>Light intensity inside greenhouse : <span style={{fontWeight: "bold"}}>{light ? light.location : 'NaN'}</span> is</span>
                   <span className='temperatureValueTempPage'>{value} %</span>
+                </div>
+                <div className='saveButton'>
+                  <Button onMouseUp={update ? updateLight : pushNewLight } variant="contained">Save</Button>
                 </div>
                 {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
               </div>

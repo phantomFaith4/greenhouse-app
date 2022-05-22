@@ -141,13 +141,16 @@ export default function TemperaturePage() {
             <div className='leftSideTemperaturePage'>
                 <div className='leftUpTemperatuePage'>
                     <div className='slideButtonHolderTemperaturePage'>
-                        <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp} onChange={handleChange}/>
+                        <Slider value={value} aria-label="Default" valueLabelDisplay="auto" onChange={handleChange}/>
                         <div className='spacer'></div>
                         <Button onClick={handleButton} variant="contained">AUTO  {button}</Button>
                     </div>
                     <div className='textHolderTemperaturePage'>
                         <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{temp ? temp.location : 'NaN'}</span> is</span>
                         <span className='temperatureValueTempPage'>{value} °C</span>
+                    </div>
+                    <div className='saveButton'>
+                      <Button onMouseUp={update ? updateTemp : pushNewTemp} variant="contained">Save</Button>
                     </div>
                     {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
                 </div>

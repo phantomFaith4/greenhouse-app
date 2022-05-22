@@ -17,7 +17,7 @@ select {
     height: 40px;
     width: 150px;
     border: 0;
-    border: 2px solid black;
+    border: 5px solid #74B49B;
     border-radius: 10px;
     margin-top: 5px;
 }
@@ -31,5 +31,5 @@ select:focus + .focus {
 }
 #greenhouses{
     font-size: 23px;
-    margin-left: 25px;
+    margin-left: 10px;
 }

@@ -136,7 +136,7 @@ export default function WaterPage() {
                     <div className='leftUpWaterPage'>
                         <div className='slideButtonHolderWaterPage'>
                           <div className='waterPageSliderAndSwitchDiv'>
-                            <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateWaterAmount : addNewWater} onChange={handleChange}/>
+                            <Slider value={value} aria-label="Default" valueLabelDisplay="auto" onChange={handleChange}/>
                             <FormControlLabel value="start" control={<Switch checked={switchBtn} onClick={OnOFf} color="primary" />} label="Fertilizer" labelPlacement="start" />
                           </div>
                             <div className='spacer'></div>
@@ -150,6 +150,9 @@ export default function WaterPage() {
                               <span className='waterValueWaterPage'>{water ? water.percentage : 'NaN'} %</span>
                             </div>
                        </div>
+                       <div className='saveButton'>
+                        <Button onMouseUp={update ? updateWaterAmount : addNewWater} variant="contained">Save</Button>
+                      </div>
                        {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
                     </div>
                     <div className='leftDownWaterPage'>
