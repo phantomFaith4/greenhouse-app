@@ -28,6 +28,12 @@ const WaterSchema = new mongoose.Schema({
     run:{
         type: Boolean,
         default:false,
+    },
+    time:{
+        type:String,
+    },
+    date:{
+        type:String,
     }
 },
 {timestamps:true}

@@ -14,7 +14,7 @@ import Alert from '@mui/material/Alert';
 
 export default function CO2Page() {
 
-  const [dateTime, setDateTime] = useState('');
+  const [dateTime, setDateTime] = useState(new Date());
   const [time, setTime] = useState('12:34pm'); 
   const [value, setValue] = useState(33);
   const [fan1,setFan1] = useState(false);
@@ -23,11 +23,19 @@ export default function CO2Page() {
   const [co2, setCO2] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [update,setUpdate] = useState(false);
+  const [upDate ,setUpDate] = useState(false);
 
-
-  const onChangeDate = (date) => {
-    console.log(date.toString());
+  const onChangeDate = async (date) => {
+    try{
+      const testDate = date.toString();
+      const arr = testDate.split(' ')
+      setDateTime(`${arr[3]}-${arr[1]}-${arr[2]}`)
+      return(<p>asdasdasd</p>);
+    }catch(err){
+ 
+    };
   };
+
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -44,16 +52,18 @@ export default function CO2Page() {
     try{
       const res = await axios.post('/api/co2/new',{
         location:loc,
-        fan1:fan1,
+        fan1:fan1, 
         fan2:fan2,
         speed:value,
+        time:time,
+        date:dateTime,
       });
       setErrorMessage(`Fan speed changed to : ${value} rpm`);
       setTimeout(()=> {
         setErrorMessage();
       }, 2500);
     }catch(err){
-      console.log("Push new temperature ERROR=> ",err);
+      console.log("Push new CO2 ERROR=> ",err);
     }
   }; 
   const updateCO2 = async () =>{
@@ -62,6 +72,8 @@ export default function CO2Page() {
         fan1:fan1,
         fan2:fan2,
         speed:value,
+        time:time,
+        date:dateTime,
       });
       setErrorMessage(`Fan speed updated to : ${value} rpm`);
       setTimeout(()=> {
@@ -71,7 +83,6 @@ export default function CO2Page() {
       console.log(err); 
     }
   };
-
   useEffect(()=>{
     const fetch = async ()=>{
       try{
@@ -80,11 +91,20 @@ export default function CO2Page() {
         setValue(res.data.speed)
         setFan2(res.data.fan2 ? true : false);
         setFan1(res.data.fan1 ? true : false)
-        console.log("CO2 DATA=>",res);
-        setUpdate(true);
+        setDateTime(res.data.date.toString());
+        setTime(res.data.time); 
+        setUpdate(true); 
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true);
+        }, 500);
       }catch(err){
         console.log(err);
         setUpdate(false);
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true); 
+        }, 500);
       }
     };
     fetch();
@@ -121,10 +141,12 @@ export default function CO2Page() {
         </div>
         <div className='rightSideCO2Page'>
           <div className='timeHolderDivLightPage'>
-            <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
+            <TimeKeeper time={time} onChange={(data) => setTime(data.formatted12)} />
           </div> 
           <div className='dateHolderDivLightPage'>
-              <DatePicker onChange={onChangeDate} />
+            {
+              upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+            }
           </div>  
         </div>
       </div>

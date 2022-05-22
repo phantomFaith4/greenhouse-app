@@ -18,12 +18,13 @@ export default function WaterPage() {
   const [auto,setAuto] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
-  const [dateTime, setDateTime] = useState('');
+  const [dateTime, setDateTime] = useState(new Date());
   const [time, setTime] = useState('12:34pm') 
   const [loc, setLoc] = useState('green1');
   const [water, setWater] = useState('');
   const [switchBtn, setSwitchBtn] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [upDate ,setUpDate] = useState(false);
 
   const OnOFf  = ()=>{
     if(switchBtn === false){
@@ -38,8 +39,14 @@ export default function WaterPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
-  const onChangeDate = (date) => {
-    console.log(date.toString());
+   const onChangeDate = async (date) => {
+    try{
+      const testDate = date.toString();
+      const arr = testDate.split(' ')
+      setDateTime(`${arr[3]}-${arr[1]}-${arr[2]}`)
+    }catch(err){
+ 
+    };
   };
   const handleButton = () =>{
     if(auto===false){ 
@@ -57,6 +64,8 @@ export default function WaterPage() {
             automatic: auto,
             amount: value,
             fertilizer:switchBtn,
+            time:time,
+            date:dateTime, 
       });
       console.log("percentage:",75,"automatic:",auto,"amount:",value,"fertilzier:",switchBtn,"--location-->",loc);
     }catch(err){
@@ -70,7 +79,9 @@ export default function WaterPage() {
             location: loc,
             automatic: auto,
             amount: value,
-            fertilizer:switchBtn, 
+            fertilizer:switchBtn,
+            time:time,
+            date:dateTime, 
       });
       setErrorMessage(`Water amount add to : ${value} ml/s`);
       setTimeout(()=> {
@@ -89,9 +100,19 @@ export default function WaterPage() {
         setButton(res.data.automatic ? 'ON' : 'OFF');
         setSwitchBtn(res.data.fertilizer);
         setUpdate(true);
+        setTime(res.data.time);
+        setDateTime(res.data.date.toString()); 
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true);
+        }, 500);
       }catch(err){
         setUpdate(false)
         console.log(err);
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true);
+        }, 500);
       }
     };
     fetch();
@@ -130,7 +151,9 @@ export default function WaterPage() {
                   <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
                 </div> 
                 <div className='dateHolderDiv'>
-                   <DatePicker onChange={onChangeDate} />
+                  {
+                    upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                  }
                 </div>  
             </div>
         </div>   

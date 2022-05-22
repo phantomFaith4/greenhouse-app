@@ -35,6 +35,7 @@ export default function LightComponent({loc}) {
       try{
         const res = await axios.get(`/api/light/${loc}`);
         setLight(res.data);
+        console.log("light widget data=>",res.data);
         res.data.automatic ? setButton('ON') : setButton('OFF');
         res.data.run ? setButton2('ON') : setButton2('OFF');
       }catch(err){
@@ -53,7 +54,7 @@ export default function LightComponent({loc}) {
                 <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
               </div>
             </div>
-            <span className='temperatureValue'>{light ? light.intensitiy : 'NaN'} %</span>
+            <span className='temperatureValue'>{light ? light.intensity : 'NaN'} %</span>
           {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div>  
     </div>

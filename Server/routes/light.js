@@ -27,6 +27,8 @@ router.post('/new', async(req,res)=>{
             intensity: req.body.intensity,
             automatic: req.body.automatic,
             run: req.body.run,
+            time: req.body.time,
+            date: req.body.date,
         });
         const light = newLight.save();
         res.status(200).json(light);
@@ -42,9 +44,11 @@ router.put('/:location',async(req,res)=>{
             intensity:req.body.intensity,
             automatic:req.body.automatic,
             run:req.body.run,
+            time:req.body.time,
+            date:req.body.date,
         }
         try{
-            const light = await Light.findOneAndUpdate(filter,updateLight,{
+            const light = await Light.findOneAndUpdate(filter,updateLight, {
                 new:true,
             });
             res.status(200).json(light);

@@ -2,8 +2,6 @@ import React from 'react'
 import './lightPage.css';
 import Topbar from '../../components/topbarComponent/Topbar';
 import Sidebar from '../../components/sidebarComponent/Sidebar';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TimeKeeper from 'react-timekeeper'; 
@@ -19,11 +17,12 @@ export default function LightPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
   const [button2 ,setButton2] = useState('OFF');
-  const [dateTime, setDateTime] = useState('');
+  const [dateTime, setDateTime] = useState(new Date());
   const [time, setTime] = useState('12:35pm'); 
   const [update, setUpdate] = useState(false);
   const [loc,setLoc] = useState('green1');
-  const [light, setLight] =useState('');
+  const [light, setLight] = useState('');
+  const [upDate ,setUpDate] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue); 
@@ -31,8 +30,15 @@ export default function LightPage() {
   const getName = async (location) =>{
     setLoc(location);
   }
-  const onChangeDate = (date) => {
-    console.log(date.toString());
+  const onChangeDate = async (date) => {
+    try{
+      const testDate = date.toString();
+      const arr = testDate.split(' ') 
+      setDateTime(`${arr[3]}-${arr[1]}-${arr[2]}`)
+      return(<p>asdasdasd</p>);
+    }catch(err){
+ 
+    };
   };
   const handleButton = () =>{
     if(auto===false){ 
@@ -59,6 +65,8 @@ export default function LightPage() {
         intensity:value,
         automatic:auto,
         run:auto2,
+        time:time,
+        date:dateTime,
       });
       setErrorMessage(`Light intensity changed to : ${value} %`);
       setTimeout(()=> {
@@ -74,6 +82,8 @@ export default function LightPage() {
         intensity:value,
         automatic:auto,
         run:auto2,
+        time:time,
+        date:dateTime,
       });
       setErrorMessage(`Light intensity updated to : ${value} %`);
       setTimeout(()=> {
@@ -93,9 +103,20 @@ export default function LightPage() {
         setButton(res.data.automatic ? 'ON' : 'OFF');
         setButton2(res.data.run ? 'ON' : 'OFF');
         setUpdate(true);
+        setTime(res.data.time);
+        setDateTime(res.data.date.toString());
+        
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true); 
+        }, 500);
       }catch(err){
         console.log(err);
         setUpdate(false);
+        setUpDate(false);
+        setTimeout(()=> {
+          setUpDate(true); 
+        }, 500);
       }
     };
     fetch();
@@ -131,7 +152,9 @@ export default function LightPage() {
             <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
           </div> 
           <div className='dateHolderDivLightPage'>
-              <DatePicker onChange={onChangeDate} />
+            {
+              upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+            }
           </div>  
         </div>
       </div>

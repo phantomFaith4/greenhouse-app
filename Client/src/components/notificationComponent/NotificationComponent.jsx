@@ -12,6 +12,7 @@ export default function NotificationComponent({loc}) {
     const fetchNotifications = async () =>{ 
         const response = await axios.get(`/api/notification/${loc}`);
         setNotifications(response.data);
+        console.log("noti=>",response.data);
     }; 
     fetchNotifications();
   },[loc]);
@@ -20,9 +21,9 @@ export default function NotificationComponent({loc}) {
     <div className='notificationComponent'>
         <span className='widgetTitle'>NOTIFICATIONS</span>
         { 
-          notifications.map(n =>  
+          notifications.map(n =>   
           ( 
-          <Notification key={n.id} notification={n}/>
+          <Notification key={n._id} notification={n}/>
           ))} 
     </div>
   )

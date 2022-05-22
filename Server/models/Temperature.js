@@ -14,6 +14,12 @@ const TemperatureSchema = new mongoose.Schema({
         type:Boolean, 
         default:false, 
     },
+    time:{
+        type:String,
+    },
+    date:{
+        type:String,
+    }
 },
 {timestamps:true},
 );

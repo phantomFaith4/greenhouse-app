@@ -28,6 +28,8 @@ router.post('/new', async(req,res)=>{
             location:req.body.location,
             speed:req.body.speed,
             run:req.body.run,
+            time:req.body.time,
+            date:req.body.date,
         }); 
         co2 = newCO2.save();
         res.status(200).json(co2);
@@ -44,12 +46,14 @@ router.put('/:location', async(req,res)=>{
             fan2: req.body.fan2,
             speed: req.body.speed,
             run: req.body.run,
+            time:req.body.time,
+            date:req.body.date,
         }
         try{
             const co2 = await CO2.findOneAndUpdate(filter,updateCO2,{
                 new:true,
             });
-            res.status(200).json(co2);
+            res.status(200).json(co2); 
         }catch(err){
             res.status(404).json(err);
         }

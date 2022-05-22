@@ -31,7 +31,7 @@ export default function HumidityComponent() {
         <div className='content'>
             <span className='widgetTitleHumidity'>HUMIDITIY</span>
             <div className='temperatureWidgetDiv'>
-              <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={''} onChange={handleChange} />
+              <Slider value={value} aria-label="Default" valueLabelDisplay="auto" onChange={handleChange} />
               <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
             </div>
             <span className='temperatureValue'>{'33'} %</span>

@@ -14,13 +14,19 @@ const CO2Schema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    speed:{
-        type: Number,
+    speed:{ 
+        type: Number, 
     },
     run:{
         type:Boolean,
         default:false,
-    }
+    },
+    time:{
+        type:String, 
+    },
+    date:{
+        type:String,
+    },
 },
 {
     timestamps:true

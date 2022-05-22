@@ -8,7 +8,7 @@ import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TimeKeeper from 'react-timekeeper';
 import DatePicker from 'sassy-datepicker';
-
+import Alert from '@mui/material/Alert';
 
 export default function TemperaturePage() {
 
@@ -22,6 +22,7 @@ export default function TemperaturePage() {
     const [location,setLocation] = useState('green1');
     const [temp, setTemp] = useState('');
     const [update, setUpdate] = useState(false);
+    const [upDate ,setUpDate] = useState(false);
 
     const getName = async (location) =>{
       setLocation(location);
@@ -33,10 +34,15 @@ export default function TemperaturePage() {
       const dateTime = date+' '+time;
       setDateTime(dateTime);
     }
-    const onChangeDate = (date) => {
-      console.log(date.toString());
+    const onChangeDate = async (date) => {
+    try{
+      const testDate = date.toString();
+      const arr = testDate.split(' ')
+      setDateTime(`${arr[3]}-${arr[1]}-${arr[2]}`)
+      }catch(err){
+ 
+      };
     };
-    
     const handleChange = (event, newValue) => {
         setValue(newValue); 
       }; 
@@ -63,7 +69,9 @@ export default function TemperaturePage() {
         const res = await axios.post('/api/temperature/new',{
           temperature:value,
           location:location,
-          automatic:auto,  
+          automatic:auto,
+          time:time,
+          date:dateTime,  
         });
         setErrorMessage(`Temperature changed to : ${value} °C`);
         setTimeout(()=> {
@@ -77,7 +85,9 @@ export default function TemperaturePage() {
       try{
         const res = await axios.put(`/api/temperature/${location}`,{
           temperature: value,
-          automatic: auto, 
+          automatic: auto,
+          time:time,
+          date:dateTime, 
         });
         setErrorMessage(`Temperature updated to : ${value} °C`);
         setTimeout(()=> {
@@ -94,10 +104,20 @@ export default function TemperaturePage() {
             setTemp(res.data);
             setUpdate(true);
             setButton(res.data.automatic ? 'ON' : 'OFF');
-            console.log(res.data);
+            setTime(res.data.time);
+            setValue(res.data.temperature)
+            console.log("tempData=>",res.data)
+            setDateTime(res.data.date);
+            setUpDate(false);
+            setTimeout(()=> {
+              setUpDate(true);
+            }, 500);
           }catch(err){
             console.log(err);
             setUpdate(false);
+            setTimeout(()=> {
+              setUpDate(true);
+            }, 500);
           }
         };
         fetch();
@@ -118,8 +138,9 @@ export default function TemperaturePage() {
                     </div>
                     <div className='textHolderTemperaturePage'>
                         <span className='temperatureTextTempPage'>Temperature inside greenhouse : <span style={{fontWeight: "bold"}}>{temp ? temp.location : 'NaN'}</span> is</span>
-                        <span className='temperatureValueTempPage'>{temp ? temp.temperature : 'NaN'} °C</span>
+                        <span className='temperatureValueTempPage'>{value} °C</span>
                     </div>
+                    {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
                 </div>
                 <div className='leftDownTemperatuePage'>
                    <div className='weatherWidget'>
@@ -129,7 +150,7 @@ export default function TemperaturePage() {
                      <div className='humidityLocationDiv'>
                       <div className='humidityDataDiv'>  
                         <p className='dateTimePara'>{dateTime}</p>
-                        <i class="humidityIcon fa-solid fa-droplet"></i><span>{weather ? weather.main.humidity : 'NaN'} %</span>
+                        <i className="humidityIcon fa-solid fa-droplet"></i><span>{weather ? weather.main.humidity : 'NaN'} %</span>
                       </div>
                       <div className='weatherDataLocationDiv'>
                           <i className="locationIcon fa-solid fa-location-dot"></i><span>{weather ? weather.name : 'NaN'}, {weather ? weather.sys.country : 'NaN'}</span>
@@ -143,7 +164,9 @@ export default function TemperaturePage() {
                   <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
                 </div> 
                 <div className='dateHolderDiv'>
-                   <DatePicker onChange={onChangeDate} />
+                  {
+                    upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                  }
                 </div>  
             </div>
         </div>

@@ -7,6 +7,8 @@ router.post('/new',async(req,res)=>{
             temperature: req.body.temperature,
             location: req.body.location, 
             automatic: req.body.automatic,
+            date:req.body.date,
+            time:req.body.time,
         });  
         const temp = await newTemp.save();
         res.status(200).json(temp);
@@ -20,6 +22,8 @@ router.put('/:location', async(req,res)=>{
         const update = { 
             temperature: req.body.temperature,
             automatic: req.body.automatic,
+            date:req.body.date,
+            time:req.body.time,
         };
         try{
             const doc = await Temperature.findOneAndUpdate(filter, update, {

@@ -17,7 +17,7 @@ export default function Topbar(props) {
         <div className='topbar'> 
             <select name="greenhouse" onChange={(e)=>props.getData(e.target.value)} id="greenhouses">
                 {greenhouse.map(g => (
-                     <option value={g.name}>{g.name}</option>
+                     <option  key={g.name} value={g.name}>{g.name}</option>
                 ))}  
             </select>
         </div>
