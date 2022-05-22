@@ -5,16 +5,20 @@ import Topbar from '../../components/topbarComponent/Topbar';
 import BigNotification from '../../components/bigNotificationComponent/BigNotification';
 import {useState, useEffect } from 'react';
 import axios from 'axios';
+import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
+
 
 export default function NotificationPage() { 
 
   const [notifications,setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     const fetch = async()=>{
       try{
         const res = await axios.get(`/api/notification/all`);
         setNotifications(res.data);
+        setLoading(true);
       }catch(err){
         console.log(err);
       }
@@ -23,17 +27,26 @@ export default function NotificationPage() {
   },[])
   return (
     <div className='notificationPage'>
-        <Sidebar/>
-        <Topbar /> 
-        <div className='notificationContainer'>
-            <div className='notificationsComponentsDiv'>
-              {
-              notifications.map(n =>(
-                <BigNotification key={n._id} notification={n} />
-              ))
-              }
-            </div>
-        </div>
+      <Sidebar/>
+      <Topbar /> 
+      {
+        loading ? 
+        (
+          <>
+              <div className='notificationContainer'>
+                  <div className='notificationsComponentsDiv'>
+                    {
+                      notifications.map(n =>(
+                        <BigNotification key={n._id} notification={n} />
+                        ))
+                      }
+                  </div>
+              </div>
+          </>
+        ) 
+        : 
+        (<LoadingComponent />)
+      }
     </div>
   )
 }

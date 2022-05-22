@@ -11,6 +11,8 @@ import Button from '@mui/material/Button';
 import TimeKeeper from 'react-timekeeper';
 import DatePicker from 'sassy-datepicker';
 import Alert from '@mui/material/Alert';
+import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
+
 
 export default function WaterPage() {
 
@@ -25,6 +27,8 @@ export default function WaterPage() {
   const [switchBtn, setSwitchBtn] = useState(false);
   const [update, setUpdate] = useState(false);
   const [upDate ,setUpDate] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const OnOFf  = ()=>{
     if(switchBtn === false){
@@ -106,6 +110,7 @@ export default function WaterPage() {
         setTimeout(()=> {
           setUpDate(true);
         }, 500);
+        setLoading(true);
       }catch(err){
         setUpdate(false)
         console.log(err);
@@ -113,6 +118,7 @@ export default function WaterPage() {
         setTimeout(()=> {
           setUpDate(true);
         }, 500);
+        setLoading(true); 
       }
     };
     fetch();
@@ -121,42 +127,51 @@ export default function WaterPage() {
     <div className='waterPage'>
         <Topbar getData={getName} /> 
         <Sidebar />
-        <div className="waterPageContaier"> 
-            <div className='leftSideWaterPage'> 
-                <div className='leftUpWaterPage'>
-                    <div className='slideButtonHolderWaterPage'>
-                      <div className='waterPageSliderAndSwitchDiv'>
-                        <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateWaterAmount : addNewWater} onChange={handleChange}/>
-                        <FormControlLabel value="start" control={<Switch checked={switchBtn} onClick={OnOFf} color="primary" />} label="Fertilizer" labelPlacement="start" />
-                      </div>
-                        <div className='spacer'></div>
-                        <div className='waterPageButtonDiv'>
-                          <Button onClick={handleButton} variant="contained">AUTO  {button}</Button> 
-                        </div>
-                        <div className='textHolderWaterPage'>
-                          <span className='waterTextWaterPage'>Amount of water going through tubes in <span style={{fontWeight: "bold"}}>{water ? water.location : 'NaN'}</span> is</span>
-                          <span className='waterValueWaterPage'>{value} ml/s</span>
-                          <span className='waterTextWaterPage'>and soil moisture is at</span>
-                          <span className='waterValueWaterPage'>{water ? water.percentage : 'NaN'} %</span>
-                        </div>
-                   </div>
-                   {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
-                </div>
-                <div className='leftDownWaterPage'>
-                  
-                </div>
-            </div> 
-            <div className='rightSideWaterPage'> 
-                <div className='timeHolderDiv'>
-                  <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
+        {
+          loading ? 
+          (
+            <>
+            <div className="waterPageContaier"> 
+                <div className='leftSideWaterPage'> 
+                    <div className='leftUpWaterPage'>
+                        <div className='slideButtonHolderWaterPage'>
+                          <div className='waterPageSliderAndSwitchDiv'>
+                            <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateWaterAmount : addNewWater} onChange={handleChange}/>
+                            <FormControlLabel value="start" control={<Switch checked={switchBtn} onClick={OnOFf} color="primary" />} label="Fertilizer" labelPlacement="start" />
+                          </div>
+                            <div className='spacer'></div>
+                            <div className='waterPageButtonDiv'>
+                              <Button onClick={handleButton} variant="contained">AUTO  {button}</Button> 
+                            </div>
+                            <div className='textHolderWaterPage'>
+                              <span className='waterTextWaterPage'>Amount of water going through tubes in <span style={{fontWeight: "bold"}}>{water ? water.location : 'NaN'}</span> is</span>
+                              <span className='waterValueWaterPage'>{value} ml/s</span>
+                              <span className='waterTextWaterPage'>and soil moisture is at</span>
+                              <span className='waterValueWaterPage'>{water ? water.percentage : 'NaN'} %</span>
+                            </div>
+                       </div>
+                       {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
+                    </div>
+                    <div className='leftDownWaterPage'>
+                      
+                    </div>
                 </div> 
-                <div className='dateHolderDiv'>
-                  {
-                    upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
-                  }
-                </div>  
+                <div className='rightSideWaterPage'> 
+                    <div className='timeHolderDiv'>
+                      <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
+                    </div> 
+                    <div className='dateHolderDiv'>
+                      {
+                        upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                      }
+                    </div>  
+                </div>
             </div>
-        </div>   
+            </>   
+          )
+          :
+          (<LoadingComponent />)
+        }
         </div>
   )
 }

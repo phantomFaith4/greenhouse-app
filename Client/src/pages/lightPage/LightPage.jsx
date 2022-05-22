@@ -9,6 +9,8 @@ import DatePicker from 'sassy-datepicker';
 import {useState, useEffect} from 'react';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
+import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
+
 export default function LightPage() { 
 
   const [value, setValue] = useState(33);
@@ -23,6 +25,8 @@ export default function LightPage() {
   const [loc,setLoc] = useState('green1');
   const [light, setLight] = useState('');
   const [upDate ,setUpDate] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue); 
@@ -105,11 +109,11 @@ export default function LightPage() {
         setUpdate(true);
         setTime(res.data.time);
         setDateTime(res.data.date.toString());
-        
         setUpDate(false);
         setTimeout(()=> {
           setUpDate(true); 
         }, 500);
+        setLoading(true); 
       }catch(err){
         console.log(err);
         setUpdate(false);
@@ -117,6 +121,7 @@ export default function LightPage() {
         setTimeout(()=> {
           setUpDate(true); 
         }, 500);
+        setLoading(true); 
       }
     };
     fetch();
@@ -126,38 +131,47 @@ export default function LightPage() {
     <div className='lightPage'> 
       <Topbar getData={getName} />
       <Sidebar />
-      <div className="lightPageContainer">
-        <div className='leftSideLigtPage'>
-          <div className='leftSideUpLightPage'>
-            <div className='slideButtonHolderTemperaturePage'>
-              <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateLight : pushNewLight } onChange={handleChange}/>
-              <div className='spacer'></div>
-              <div className='buttonHolderLightPageDiv'>
-                <Button onClick={handleButton} variant="contained">TURN  {button}</Button>
-                <Button onClick={handleButton2} variant="contained">AUTO  {button2}</Button>
+      {
+        loading ? 
+        (
+          <>
+          <div className="lightPageContainer">
+            <div className='leftSideLigtPage'>
+              <div className='leftSideUpLightPage'>
+                <div className='slideButtonHolderTemperaturePage'>
+                  <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateLight : pushNewLight } onChange={handleChange}/>
+                  <div className='spacer'></div>
+                  <div className='buttonHolderLightPageDiv'>
+                    <Button onClick={handleButton} variant="contained">TURN  {button}</Button>
+                    <Button onClick={handleButton2} variant="contained">AUTO  {button2}</Button>
+                  </div>
+                </div>
+                <div className='textHolderTemperaturePage'>
+                  <span className='lightTextLightPage'>Light intensity inside greenhouse : <span style={{fontWeight: "bold"}}>{light ? light.location : 'NaN'}</span> is</span>
+                  <span className='temperatureValueTempPage'>{value} %</span>
+                </div>
+                {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
+              </div>
+              <div className='leftSideDownLightPage'>
+                
               </div>
             </div>
-            <div className='textHolderTemperaturePage'>
-              <span className='lightTextLightPage'>Light intensity inside greenhouse : <span style={{fontWeight: "bold"}}>{light ? light.location : 'NaN'}</span> is</span>
-              <span className='temperatureValueTempPage'>{value} %</span>
+            <div className='rightSideLigtPage'>
+              <div className='timeHolderDivLightPage'>
+                <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
+              </div> 
+              <div className='dateHolderDivLightPage'>
+                {
+                  upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                }
+              </div>  
             </div>
-            {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div>
-          <div className='leftSideDownLightPage'>
-            
-          </div>
-        </div>
-        <div className='rightSideLigtPage'>
-          <div className='timeHolderDivLightPage'>
-            <TimeKeeper time={time} onChange={(newTime) => setTime(newTime.formatted12)} /> 
-          </div> 
-          <div className='dateHolderDivLightPage'>
-            {
-              upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
-            }
-          </div>  
-        </div>
-      </div>
+          </>
+        )
+        :
+        (<LoadingComponent />)
+      }
     </div>
   )
 }

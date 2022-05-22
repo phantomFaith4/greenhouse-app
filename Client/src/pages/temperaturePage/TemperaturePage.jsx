@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import TimeKeeper from 'react-timekeeper';
 import DatePicker from 'sassy-datepicker';
 import Alert from '@mui/material/Alert';
+import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
 
 export default function TemperaturePage() {
 
@@ -23,6 +24,8 @@ export default function TemperaturePage() {
     const [temp, setTemp] = useState('');
     const [update, setUpdate] = useState(false);
     const [upDate ,setUpDate] = useState(false);
+    const [loading, setLoading] = useState(false);
+
 
     const getName = async (location) =>{
       setLocation(location);
@@ -112,12 +115,14 @@ export default function TemperaturePage() {
             setTimeout(()=> {
               setUpDate(true);
             }, 500);
+            setLoading(true);
           }catch(err){
             console.log(err);
             setUpdate(false);
             setTimeout(()=> {
               setUpDate(true);
             }, 500);
+            setLoading(true); 
           }
         };
         fetch();
@@ -128,6 +133,10 @@ export default function TemperaturePage() {
     <div className='temperaturePage'>
         <Topbar getData={getName} />
         <Sidebar />
+        {
+          loading ? 
+          (
+            <>
         <div className="containerTemperaturePage">  
             <div className='leftSideTemperaturePage'>
                 <div className='leftUpTemperatuePage'>
@@ -170,6 +179,11 @@ export default function TemperaturePage() {
                 </div>  
             </div>
         </div>
+        </>
+          )
+          :
+          (<LoadingComponent />)
+        }
     </div> 
   ) 
 } 

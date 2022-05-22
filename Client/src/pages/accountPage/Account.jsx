@@ -10,8 +10,13 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import UserSettings from '../../components/userSettingsComponent/UserSettings';
 import GreenhouseSettingsComponent from '../../components/greenhouseSettingsComponent/GreenhouseSettingsComponent';
+import LoadingComponent from '../../components/loadingComponent/LoadingComponent';
+
 
 export default function Account(props) {
+
+  const [loading, setLoading] = useState(false);
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;  
     return (
@@ -46,32 +51,44 @@ export default function Account(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  useEffect(()=>{
+    setLoading(true);
+  },[]);
   return (
     <div className='account'>
       <Topbar />
       <Sidebar />
-        <div className="accountComponents">
-          <div className='tabHolder'>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="User settings"  />
-              <Tab label="Greenhouse settings" />
-              <Tab label="Notification settings"  />
-              <Tab label="Privacy settings" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-              <UserSettings />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <GreenhouseSettingsComponent />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              Item Three
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-              Item Four
-            </TabPanel>
+      {
+        loading ? 
+        (
+          <>
+          <div className="accountComponents">
+            <div className='tabHolder'>
+              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label="User settings"  />
+                <Tab label="Greenhouse settings" />
+                <Tab label="Notification settings"  />
+                <Tab label="Privacy settings" />
+              </Tabs>
+              <TabPanel value={value} index={0}>
+                <UserSettings />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                  <GreenhouseSettingsComponent />
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                Item Three
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                Item Four
+              </TabPanel>
+            </div>
           </div>
-        </div>
+        </>
+        )
+         : 
+         (<LoadingComponent />)
+      }
     </div>
   )
 }
