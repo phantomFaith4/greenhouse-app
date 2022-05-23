@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import {useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
-
+import * as notificationOperation from '../PushNotification/pushNotification.js';
 
 export default function TemperatureComponent({loc}) {
   const [value, setValue] = useState(33);
@@ -13,7 +13,7 @@ export default function TemperatureComponent({loc}) {
   const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
   const [update, setUpdate] = useState(false);
-
+  const [loca ,setLoca] = useState('');
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -42,6 +42,7 @@ export default function TemperatureComponent({loc}) {
       setTimeout(()=> {
         setErrorMessage()
       }, 1000);
+      notificationOperation.newNotification(`Temperature updated to: ${value} °C`, loc);
     }catch(err){   
       console.log(err); 
     }
@@ -57,7 +58,7 @@ export default function TemperatureComponent({loc}) {
     update ? updateTemp() : pushNewTemp();
   } 
   useEffect(()=>{
-    console.log('TEST LOCATION=>',loc);
+    setLoca(loc);
     const fetch = async () =>{
       try{
         const res = await axios.get(`/api/temperature/${loc}`);
@@ -70,7 +71,7 @@ export default function TemperatureComponent({loc}) {
       }
     } 
     fetch(); 
-  },[loc,auto]);
+  },[loc,auto,loca]);
   return (
     <div className='temperatureComponent'>
           <div className='content'>
