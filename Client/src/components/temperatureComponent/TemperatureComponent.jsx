@@ -14,7 +14,9 @@ export default function TemperatureComponent({loc}) {
   const [button ,setButton] = useState('OFF');
   const [update, setUpdate] = useState(false);
   const [loca ,setLoca] = useState('');
-  
+
+  const [test,setTest] = useState(false);
+
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -64,16 +66,22 @@ export default function TemperatureComponent({loc}) {
         const res = await axios.get(`/api/temperature/${loc}`);
         setValue(res.data.temperature);
         setButton(res.data.automatic ? 'ON' : 'OFF');
+        setTest(true);
         setUpdate(true);
       }catch(err){
         console.log(err);
-        setUpdate(false); 
+        setUpdate(false);
+        setTest(false); 
       }
     } 
     fetch(); 
   },[loc,auto,loca]);
   return (
     <div className='temperatureComponent'>
+      {
+        test ? 
+        (
+          <>
           <div className='content'>
             <span className='widgetTitle'>TEMPERATURE</span>
             <div className='temperatureWidgetDiv'>
@@ -83,6 +91,15 @@ export default function TemperatureComponent({loc}) {
             <span className='temperatureValue'>{value}°C</span>
             {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
           </div> 
+          </>
+        )
+        :
+        (
+          <>
+          <p>No temperature data for this greenhoues</p>
+          </>
+        )
+      }
     </div>
     ); 
 }
