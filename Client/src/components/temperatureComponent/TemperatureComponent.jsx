@@ -17,15 +17,6 @@ export default function TemperatureComponent({loc}) {
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
-  const handleButton = () =>{
-    if(auto===false){
-      setAuto(true);
-      setButton('ON');
-    }else{
-      setAuto(false);
-      setButton('OFF');
-    }
-  } 
   const pushNewTemp = async () => {
     try{
       const res = await axios.post('/api/temperature/new',{
@@ -55,6 +46,16 @@ export default function TemperatureComponent({loc}) {
       console.log(err); 
     }
   };
+  const handleButton = () =>{
+    if(auto===false){
+      setAuto(true);
+      setButton('ON');
+    }else{
+      setAuto(false);
+      setButton('OFF');
+    }
+    update ? updateTemp() : pushNewTemp();
+  } 
   useEffect(()=>{
     console.log('TEST LOCATION=>',loc);
     const fetch = async () =>{
@@ -69,8 +70,7 @@ export default function TemperatureComponent({loc}) {
       }
     } 
     fetch(); 
-  },[loc]);
-
+  },[loc,auto]);
   return (
     <div className='temperatureComponent'>
           <div className='content'>

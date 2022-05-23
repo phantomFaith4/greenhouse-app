@@ -21,6 +21,10 @@ const CO2Schema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    automatic:{ 
+        type:Boolean,
+        default:false,
+    },
     time:{
         type:String, 
     },

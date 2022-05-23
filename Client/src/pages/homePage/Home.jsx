@@ -22,7 +22,6 @@ export default function Home() {
     useEffect(()=>{
         setLoading(true);
     },[]);
-    
     return (
         <div className='home'>
             <Sidebar />

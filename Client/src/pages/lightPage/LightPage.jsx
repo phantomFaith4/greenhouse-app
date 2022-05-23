@@ -13,12 +13,11 @@ import LoadingComponent from '../../components/loadingComponent/LoadingComponent
 
 export default function LightPage() { 
 
-  const [value, setValue] = useState(33);
-  const [auto,setAuto] = useState(false);
-  const [auto2,setAuto2] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
-  const [button2 ,setButton2] = useState('OFF');
+  const [run, setRun] = useState(false);
+  
+  const [value, setValue] = useState(33);
+  const [errorMessage, setErrorMessage] = useState('');
   const [dateTime, setDateTime] = useState(new Date());
   const [time, setTime] = useState('12:35pm'); 
   const [update, setUpdate] = useState(false);
@@ -44,31 +43,12 @@ export default function LightPage() {
  
     };
   };
-  const handleButton = () =>{
-    if(auto===false){ 
-      setAuto(true); 
-      setButton('ON');
-    }else{
-      setAuto(false);
-      setButton('OFF'); 
-    }
-  } 
-  const handleButton2 = () =>{
-    if(auto2===false){ 
-      setAuto2(true); 
-      setButton2('ON');
-    }else{
-      setAuto2(false);
-      setButton2('OFF'); 
-    }
-  } 
   const pushNewLight = async () => {
     try{
       const res = await axios.post('/api/light/new',{
         location:loc,
         intensity:value,
-        automatic:auto,
-        run:auto2,
+        run:run,
         time:time,
         date:dateTime,
       });
@@ -84,8 +64,7 @@ export default function LightPage() {
     try{
       const res = await axios.put(`/api/light/${loc}`,{
         intensity:value,
-        automatic:auto,
-        run:auto2,
+        run:run,
         time:time,
         date:dateTime,
       });
@@ -97,22 +76,29 @@ export default function LightPage() {
       console.log(err); 
     }
   };
+  const handleButton = () =>{
+    if(run === false){
+      setRun(true);
+      setButton('ON');
+    }else{
+      setRun(false);
+      setButton('OFF');
+    }
+  };
   useEffect(()=>{
     const fetch = async ()=>{
       try{
         const res = await axios.get(`/api/light/${loc}`);
         setLight(res.data);
         setValue(res.data.intensity)
-        console.log("LightData=>",res.data);
-        setButton(res.data.automatic ? 'ON' : 'OFF');
-        setButton2(res.data.run ? 'ON' : 'OFF');
-        setUpdate(true);
+        setButton(res.data.run ? 'ON' : 'OFF');
         setTime(res.data.time);
         setDateTime(res.data.date.toString());
         setUpDate(false);
         setTimeout(()=> {
           setUpDate(true); 
         }, 500);
+        setUpdate(true);
         setLoading(true); 
       }catch(err){
         console.log(err);
@@ -122,7 +108,7 @@ export default function LightPage() {
           setUpDate(true); 
         }, 500);
         setLoading(true); 
-      }
+      } 
     };
     fetch();
   },[loc]);
@@ -143,7 +129,7 @@ export default function LightPage() {
                   <div className='spacer'></div>
                   <div className='buttonHolderLightPageDiv'>
                     <Button onClick={handleButton} variant="contained">TURN  {button}</Button>
-                    <Button onClick={handleButton2}  variant="contained">AUTO  {button2}</Button>
+                    {/* <Button onClick={handleButton2}  variant="contained">AUTO  {button2}</Button> */}
                   </div>
                 </div>
                 <div className='textHolderTemperaturePage'>
@@ -165,7 +151,7 @@ export default function LightPage() {
               </div> 
               <div className='dateHolderDivLightPage'>
                 {
-                  upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                  upDate ? (<DatePicker selected={new Date(dateTime)} minDate={new Date()} onChange={onChangeDate} />) : ('false')
                 }
               </div>  
             </div>

@@ -77,7 +77,7 @@ export default function CO2Page() {
         fan2:fan2,
         speed:value,
         time:time,
-        date:dateTime,
+        date:dateTime, 
       });
       setErrorMessage(`Fan speed updated to : ${value} rpm`);
       setTimeout(()=> {
@@ -158,7 +158,7 @@ export default function CO2Page() {
               </div> 
               <div className='dateHolderDivLightPage'>
                 {
-                  upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                  upDate ? (<DatePicker selected={new Date(dateTime)}  minDate={new Date()} onChange={onChangeDate} />) : ('false')
                 }
               </div>  
             </div>

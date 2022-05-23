@@ -16,10 +16,10 @@ import LoadingComponent from '../../components/loadingComponent/LoadingComponent
 
 export default function WaterPage() {
 
-  const [value, setValue] = useState(33);
   const [auto,setAuto] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
+  const [value, setValue] = useState(33);
+  const [errorMessage, setErrorMessage] = useState('');
   const [dateTime, setDateTime] = useState(new Date());
   const [time, setTime] = useState('12:34pm') 
   const [loc, setLoc] = useState('green1');
@@ -71,7 +71,10 @@ export default function WaterPage() {
             time:time,
             date:dateTime, 
       });
-      console.log("percentage:",75,"automatic:",auto,"amount:",value,"fertilzier:",switchBtn,"--location-->",loc);
+      setErrorMessage(`Water amount updated to : ${value} ml/s`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 2500);
     }catch(err){
       console.log(err);
     }
@@ -102,22 +105,23 @@ export default function WaterPage() {
         setWater(res.data);
         setValue(res? res.data.amount : 0);
         setButton(res.data.automatic ? 'ON' : 'OFF');
-        setSwitchBtn(res.data.fertilizer);
-        setUpdate(true);
+        setSwitchBtn(res.data.fertilizer); 
         setTime(res.data.time);
-        setDateTime(res.data.date.toString()); 
+        setDateTime(res.data.date ? res.data.date.toString() : '2022-May-21'); 
         setUpDate(false);
+        console.log("water=>",res.data)
         setTimeout(()=> {
           setUpDate(true);
         }, 500);
-        setLoading(true);
+        setUpdate(true);
+        setLoading(true); 
       }catch(err){
-        setUpdate(false)
         console.log(err);
         setUpDate(false);
         setTimeout(()=> {
           setUpDate(true);
         }, 500);
+        setUpdate(false)
         setLoading(true); 
       }
     };
@@ -165,7 +169,7 @@ export default function WaterPage() {
                     </div> 
                     <div className='dateHolderDiv'>
                       {
-                        upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                        upDate ? (<DatePicker selected={new Date(dateTime)}  minDate={new Date()} onChange={onChangeDate} />) : ('false')
                       }
                     </div>  
                 </div>

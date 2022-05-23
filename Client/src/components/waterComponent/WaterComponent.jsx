@@ -10,9 +10,70 @@ export default function WaterComponent({loc}) {
   const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
   const [auto,setAuto] = useState(false);
+
   const [button2 ,setButton2] = useState('OFF');
   const [auto2,setAuto2] = useState(false);
+
   const [water,setWater] = useState('');
+  const [update, setUpdate] = useState(false);
+
+
+  const updateWaterAmountComp = async () =>{
+    try{
+      const res = await axios.put(`/api/water/${loc}`,{
+            percentage: 75,
+            automatic: auto,
+      });
+      setErrorMessage(`Automatic ${button}`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 2500);
+    }catch(err){
+      console.log(err);
+    }
+  } ; 
+  const addNewWaterComp = async ()=>{
+     try{
+      const res = await axios.post(`/api/water/new`,{
+            location: loc,
+            automatic: auto,
+      });
+      setErrorMessage(`Automatic ${button}`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 2500);
+    }catch(err){
+      console.log("ERROR ADING=>",err);
+    } 
+  };
+  const updateWaterAmount2Comp = async () =>{
+    try{
+      const res = await axios.put(`/api/water/${loc}`,{
+            percentage: 75,
+            water:auto2,
+      });
+      setErrorMessage(`Automatic ${button}`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 2500);
+    }catch(err){
+      console.log(err);
+    }
+  } ; 
+  const addNewWater2Comp = async ()=>{
+     try{
+      const res = await axios.post(`/api/water/new`,{
+            location: loc,
+            water:auto2,
+      });
+      setErrorMessage(`Automatic ${button}`);
+      setTimeout(()=> {
+        setErrorMessage()
+      }, 2500);
+    }catch(err){
+      console.log("ERROR ADING=>",err);
+    } 
+  };
   const handleButton = () =>{
     if(auto===false){
       setAuto(true);
@@ -21,6 +82,7 @@ export default function WaterComponent({loc}) {
       setAuto(false);
       setButton('OFF');
     }
+    update ? updateWaterAmountComp() : addNewWaterComp();
   } 
   const handleButton2 = () =>{
     if(auto2===false){
@@ -30,22 +92,24 @@ export default function WaterComponent({loc}) {
       setAuto2(false);
       setButton2('OFF');
     }
+    update ? updateWaterAmount2Comp() : addNewWater2Comp();
   } 
 
   useEffect(()=>{ 
-    const fetch = async()=>{
+    const fetch = async () =>{
       try{
         const res = await axios.get(`/api/water/${loc}`);
         setWater(res.data);
-        console.log("RES WATER=>",res);
         res.data.automatic ? setButton('ON') : setButton('OFF');
-        res.data.run ? setButton2('ON') : setButton2('OFF');
+        res.data.water ? setButton2('ON') : setButton2('OFF');
+        setUpdate(true); 
       }catch(err){
         console.log(err);
+        setUpdate(false);
       }
     };
-    fetch();
-  },[loc]);
+    fetch(); 
+  },[loc,auto,auto2]);
 
   return (
     <div className='waterComponent'>
@@ -54,8 +118,8 @@ export default function WaterComponent({loc}) {
       </div>
       <div className='waterButtonDiv'>
             <div className='waterButtonDiv1'>
-              <Button onClick={handleButton} variant="contained">WATER {button}</Button>
-              <Button onClick={handleButton2} variant="contained">AUTO {button2}</Button> 
+              <Button onClick={handleButton2} variant="contained">WATER {button2}</Button>
+              <Button onClick={handleButton} variant="contained">AUTO {button}</Button> 
             </div>
             <div className='waterButtonDiv2'>
               <span className=''>{water ? water.percentage : 'NaN'} %</span>

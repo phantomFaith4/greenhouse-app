@@ -110,15 +110,16 @@ export default function TemperaturePage() {
             setTime(res.data.time);
             setValue(res.data.temperature)
             console.log("tempData=>",res.data)
-            setDateTime(res.data.date);
+            setDateTime(res.data.date ? res.data.date : '2022-May-21');
             setUpDate(false);
             setTimeout(()=> {
-              setUpDate(true);
+              setUpDate(true); 
             }, 500);
             setLoading(true);
           }catch(err){
             console.log(err);
             setUpdate(false);
+            setUpDate(false)
             setTimeout(()=> {
               setUpDate(true);
             }, 500);
@@ -177,7 +178,7 @@ export default function TemperaturePage() {
                 </div> 
                 <div className='dateHolderDiv'>
                   {
-                    upDate ? (<DatePicker selected={new Date(dateTime)} onChange={onChangeDate} />) : ('false')
+                    upDate ? (<DatePicker selected={new Date(dateTime)} minDate={new Date()} onChange={onChangeDate} />) : ('false')
                   }
                 </div>  
             </div>

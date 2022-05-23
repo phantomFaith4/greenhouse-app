@@ -12,8 +12,8 @@ router.get('/all', async(req,res)=>{
 });
 
 router.get('/:location', async(req,res)=>{
-    const location = req.params.location;
     try{
+        const location = req.params.location;
         const water = await Water.findOne({location:location});
         res.status(200).json(water);
     }catch(err){
