@@ -1,22 +1,21 @@
 import React from 'react'
 import './waterComponent.css';
 import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
 import axios from 'axios';
 import {useState, useEffect } from 'react';
+import * as notificationOperation from '../PushNotification/pushNotification.js';
+import Button from '@mui/material/Button';
 
 export default function WaterComponent({loc}) { 
 
   const [errorMessage, setErrorMessage] = useState('');
   const [button ,setButton] = useState('OFF');
   const [auto,setAuto] = useState(false);
-
   const [button2 ,setButton2] = useState('OFF');
   const [auto2,setAuto2] = useState(false);
-
   const [water,setWater] = useState('');
   const [update, setUpdate] = useState(false);
-
+  const [loca ,setLoca] = useState('');
 
   const updateWaterAmountComp = async () =>{
     try{
@@ -24,10 +23,11 @@ export default function WaterComponent({loc}) {
             percentage: 75,
             automatic: auto,
       });
-      setErrorMessage(`Automatic ${button}`);
+      setErrorMessage(`Automatic watering:  ${button}`);
       setTimeout(()=> {
         setErrorMessage()
       }, 2500);
+      notificationOperation.newNotification(`Automatic watering:  ${water.automatic ? 'off' : 'on'}`, loc);
     }catch(err){
       console.log(err);
     }
@@ -38,7 +38,8 @@ export default function WaterComponent({loc}) {
             location: loc,
             automatic: auto,
       });
-      setErrorMessage(`Automatic ${button}`);
+      setErrorMessage(`Automatic watering: ${button}`);
+      notificationOperation.newNotification(`Automatic watering: ${water.automatic ? 'off' : 'on'}`, loc);
       setTimeout(()=> {
         setErrorMessage()
       }, 2500);
@@ -52,24 +53,26 @@ export default function WaterComponent({loc}) {
             percentage: 75,
             water:auto2,
       });
-      setErrorMessage(`Automatic ${button}`);
+      setErrorMessage(`Watering ${button2}`);
       setTimeout(()=> {
         setErrorMessage()
       }, 2500);
+      notificationOperation.newNotification(`Watering: ${water.water ? 'off' : 'on'}`, loc);
     }catch(err){
       console.log(err);
     }
-  } ; 
+  }; 
   const addNewWater2Comp = async ()=>{
      try{
       const res = await axios.post(`/api/water/new`,{
             location: loc,
             water:auto2,
       });
-      setErrorMessage(`Automatic ${button}`);
+      setErrorMessage(`Watering ${button2}`);
       setTimeout(()=> {
         setErrorMessage()
       }, 2500);
+      notificationOperation.newNotification(`Watering: ${water.water ? 'off' : 'on'}`, loc);
     }catch(err){
       console.log("ERROR ADING=>",err);
     } 
@@ -77,31 +80,28 @@ export default function WaterComponent({loc}) {
   const handleButton = () =>{
     if(auto===false){
       setAuto(true);
-      setButton('ON');
     }else{
       setAuto(false);
-      setButton('OFF');
     }
     update ? updateWaterAmountComp() : addNewWaterComp();
   } 
   const handleButton2 = () =>{
     if(auto2===false){
       setAuto2(true);
-      setButton2('ON');
     }else{
       setAuto2(false);
-      setButton2('OFF');
     }
     update ? updateWaterAmount2Comp() : addNewWater2Comp();
   } 
 
-  useEffect(()=>{ 
+  useEffect(()=>{
+    setLoca(loc); 
     const fetch = async () =>{
       try{
         const res = await axios.get(`/api/water/${loc}`);
         setWater(res.data);
-        res.data.automatic ? setButton('ON') : setButton('OFF');
-        res.data.water ? setButton2('ON') : setButton2('OFF');
+        setButton(res.data.automatic ? 'ON' : 'OFF');
+        setButton2(res.data.water ? 'ON' : 'OFF');
         setUpdate(true); 
       }catch(err){
         console.log(err);
@@ -109,7 +109,7 @@ export default function WaterComponent({loc}) {
       }
     };
     fetch(); 
-  },[loc,auto,auto2]);
+  },[loc,auto,auto2,loca]);
 
   return (
     <div className='waterComponent'>
@@ -123,9 +123,9 @@ export default function WaterComponent({loc}) {
             </div>
             <div className='waterButtonDiv2'>
               <span className=''>{water ? water.percentage : 'NaN'} %</span>
-              {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
             </div>
       </div>
+      {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }
     </div>
   )
 }

@@ -36,4 +36,15 @@ router.post('/new',async(req,res)=>{
         res.status(400).json(err);
     };
 });
+
+router.delete('/all',async(req,res)=>{
+    try{
+        await Notification.deleteMany();
+        res.status(200).json('All notifications deleted');
+    }catch(err){
+        res.status(400).json(err);
+    };
+});
+
+
 module.exports = router;

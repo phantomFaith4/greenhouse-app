@@ -35,11 +35,13 @@ export default function NotificationPage() {
           <>
               <div className='notificationContainer'>
                   <div className='notificationsComponentsDiv'>
+                    <ul className='notificationList'>
                     {
                       notifications.map(n =>(
-                        <BigNotification key={n._id} notification={n} />
+                        <li className='notificationListItem'><BigNotification key={n._id} notification={n} /></li>
                         ))
                       }
+                    </ul>
                   </div>
               </div>
           </>

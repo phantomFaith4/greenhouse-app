@@ -1,11 +1,11 @@
 import React from 'react';
 import './temperatureComponent.css';
 import Slider from '@mui/material/Slider';
-import Button from '@mui/material/Button';
 import axios from 'axios';
 import {useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import * as notificationOperation from '../PushNotification/pushNotification.js';
+import Button from '@mui/material/Button';
 
 export default function TemperatureComponent({loc}) {
   const [value, setValue] = useState(33);
@@ -14,6 +14,7 @@ export default function TemperatureComponent({loc}) {
   const [button ,setButton] = useState('OFF');
   const [update, setUpdate] = useState(false);
   const [loca ,setLoca] = useState('');
+  
   const handleChange = (event, newValue) => {
     setValue(newValue); 
   }; 
@@ -28,6 +29,7 @@ export default function TemperatureComponent({loc}) {
       setTimeout(()=> {
         setErrorMessage()
       }, 1000);
+      notificationOperation.newNotification(`Temperature changed to: ${value} °C`, loc);
     }catch(err){
       console.log("Push new temperature ERROR=> ",err);
     }
@@ -46,14 +48,12 @@ export default function TemperatureComponent({loc}) {
     }catch(err){   
       console.log(err); 
     }
-  };
+  }; 
   const handleButton = () =>{
     if(auto===false){
       setAuto(true);
-      setButton('ON');
     }else{
       setAuto(false);
-      setButton('OFF');
     }
     update ? updateTemp() : pushNewTemp();
   } 
@@ -78,7 +78,7 @@ export default function TemperatureComponent({loc}) {
             <span className='widgetTitle'>TEMPERATURE</span>
             <div className='temperatureWidgetDiv'>
               <Slider value={value} aria-label="Default" valueLabelDisplay="auto"  onMouseUp={update ? updateTemp : pushNewTemp } onChange={handleChange}/>
-              <Button onClick={handleButton} variant="contained">AUTO {button} </Button>
+              <Button className='' onClick={handleButton} variant="contained">AUTO {button} </Button>
             </div>
             <span className='temperatureValue'>{value}°C</span>
             {errorMessage && <Alert variant="filled" severity="warning">{errorMessage}</Alert>  }

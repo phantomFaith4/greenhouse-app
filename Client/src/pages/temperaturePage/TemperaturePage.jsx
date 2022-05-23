@@ -52,10 +52,8 @@ export default function TemperaturePage() {
       const handleButton = () =>{
         if(auto===false){ 
           setAuto(true);
-          setButton('ON');
         }else{
           setAuto(false);
-          setButton('OFF'); 
         }
       }  
       const getWeather = async ()=>{
@@ -108,8 +106,7 @@ export default function TemperaturePage() {
             setUpdate(true);
             setButton(res.data.automatic ? 'ON' : 'OFF');
             setTime(res.data.time);
-            setValue(res.data.temperature)
-            console.log("tempData=>",res.data)
+            setValue(res.data.temperature);
             setDateTime(res.data.date ? res.data.date : '2022-May-21');
             setUpDate(false);
             setTimeout(()=> {
