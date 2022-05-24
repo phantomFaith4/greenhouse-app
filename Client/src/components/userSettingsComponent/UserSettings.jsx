@@ -9,8 +9,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { Buffer } from 'buffer';
 
 export default function UserSettings() {
+  window.Buffer = Buffer;
   const [open, setOpen] = useState(false);
   const [user,setUser] = useState([]);
 
@@ -18,6 +20,10 @@ export default function UserSettings() {
   const [lastname,setLastname] = useState();
   const [email,setEmail] = useState();
   const [phone,setPhone] = useState();
+  const [file, setFile] = useState(null);
+
+  const [mimeType_d,setMimeType] = useState('');
+  const [b64_d,setB64] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,33 +44,57 @@ export default function UserSettings() {
 
     };
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append("name", filename);
+      data.append("file", file);
+      try { 
+        await axios.post(`/api/uploadPhoto/${user._id}`, data);
+        console.log("Image uploaded");
+      } catch (err) {}
+  };
+
+ 
   useEffect(()=>{
       const fetch = async()=>{
         try{
          const user = await JSON.parse(localStorage.getItem('user'));
          try{
            const res = await axios.get(`/api/user/${user._id}`);
-           setUser(res.data);
-         }catch(err){
+            setUser(res.data);
+            const buffer = res.data.image.data.data; 
+            const b64 = new Buffer.from(buffer).toString('base64');
+            const mimeType = "image/png";
+            setMimeType(mimeType);
+            setB64(b64);
+          }catch(err){
 
-         };
+         }; 
         }catch(err){
 
         }
       };
       fetch();
-  },[updateUser]); 
+  },[]); 
 
   return (
     <div className='userSettings'>
         <div className='profileImageDiv'>
-        <img src={`https://preview.redd.it/tvnnil0xv7g61.jpg?width=1080&format=pjpg&auto=webp&s=817036d74401fcdd9dd61dd3db34fa8ebd0144a1`} alt='' className='profileImg' />
+        <img src={`data:${mimeType_d};base64,${b64_d}`} alt='' className='profileImg' />
+            <form onSubmit={handleSubmit}>
             <label for="profileImg">
-              <div className='editImage'>
-                <i className="editImageIcon fa-solid fa-pen"></i>
-                <input type="file" id="profileImg" name="profileImg" accept="image/png, image/jpeg" />
-              </div>  
-            </label> 
+                <div className='editImage'>
+                  <i className="editImageIcon fa-solid fa-pen"></i>
+                  <input onChange={(e) => setFile(e.target.files[0])} type="file" id="profileImg" name="profileImg" accept="image/png, image/jpeg" />
+                </div>  
+            </label>     
+            <button className="writeSubmit" type="submit">
+              Publish  
+            </button>
+            </form>
         </div>
         <div className='userInfoDiv'>
           <div className='userPart1'>

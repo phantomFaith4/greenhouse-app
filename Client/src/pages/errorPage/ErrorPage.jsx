@@ -2,8 +2,8 @@ import React from 'react'
 import {Link } from 'react-router-dom';
 import './errorPage.css';
 
-
 export default function ErrorPage() {
+  
   return (
     <div className='errorPage'>
       <h1>ERROR 404</h1>
