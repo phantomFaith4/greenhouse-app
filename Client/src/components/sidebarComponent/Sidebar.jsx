@@ -3,6 +3,10 @@ import './sidebar.css';
 import {Link } from 'react-router-dom';
 
 export default function Sidebar() {
+    const handleLogout = ()=>{
+        localStorage.clear();
+        window.location.replace(`/login`);
+    }
   return (
         <div className='sidebar'> 
             <div className='userPartSidebar'>
@@ -19,7 +23,7 @@ export default function Sidebar() {
                 <Link to='/humidity'><i className="sidebarIcon fas fa-tint"></i> </Link>
             </div> 
             <div className='logoutPartSidebar'>
-                <i className="sidebarIcon fas fa-sign-out-alt"></i>
+                <i onClick={handleLogout} className="sidebarIcon fas fa-sign-out-alt"></i>
             </div>
         </div>
     );

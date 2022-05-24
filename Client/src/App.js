@@ -13,12 +13,13 @@ import WaterPage from "./pages/waterPage/WaterPage";
 import HumidityPage from "./pages/humidityPage/HumidityPage";
 import LightPage from "./pages/lightPage/LightPage";
 import CO2Page from './pages/co2Page/CO2Page';
-
+import LoginPage from './pages/loginPage/Login';
 function App() {
   return (
     <div className="App"> 
      <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/account" element={<Account />} />
           <Route path="/" element={<Login />} />

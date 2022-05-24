@@ -12,10 +12,11 @@ import TextField from '@mui/material/TextField';
 import { Buffer } from 'buffer';
 
 export default function UserSettings() {
+  
   window.Buffer = Buffer;
+
   const [open, setOpen] = useState(false);
   const [user,setUser] = useState([]);
-
   const [name,setName] = useState();
   const [lastname,setLastname] = useState();
   const [email,setEmail] = useState();
@@ -33,7 +34,7 @@ export default function UserSettings() {
   };
   const updateUser = async ()=>{
     try{
-      const update = await axios.put(`/api/user/:id`,{
+      const update = await axios.put(`/api/user/${user._id}`,{
         name:name,
         lastname:lastname,
         email:email,
@@ -44,8 +45,8 @@ export default function UserSettings() {
 
     };
   }
-
   const handleSubmit = async (e) => {
+
     e.preventDefault();
       const data = new FormData();
       const filename = Date.now() + file.name;
@@ -54,10 +55,11 @@ export default function UserSettings() {
       try { 
         await axios.post(`/api/uploadPhoto/${user._id}`, data);
         console.log("Image uploaded");
-      } catch (err) {}
+        setFile(null);
+      } catch (err) {};
+      
   };
-
- 
+  
   useEffect(()=>{
       const fetch = async()=>{
         try{
@@ -73,12 +75,10 @@ export default function UserSettings() {
           }catch(err){
 
          }; 
-        }catch(err){
-
-        }
+        }catch(err){};
       };
       fetch();
-  },[]); 
+  },[user]); 
 
   return (
     <div className='userSettings'>
@@ -90,10 +90,19 @@ export default function UserSettings() {
                   <i className="editImageIcon fa-solid fa-pen"></i>
                   <input onChange={(e) => setFile(e.target.files[0])} type="file" id="profileImg" name="profileImg" accept="image/png, image/jpeg" />
                 </div>  
-            </label>     
-            <button className="writeSubmit" type="submit">
-              Publish  
-            </button>
+            </label>
+            {
+              file ? 
+              (
+                <button className="writeSubmit" type="submit">
+                Save
+              </button>
+              )
+              :
+              (
+                ''
+              )
+            }     
             </form>
         </div>
         <div className='userInfoDiv'>
