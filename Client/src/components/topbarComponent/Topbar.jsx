@@ -16,7 +16,9 @@ export default function Topbar(props) {
     return ( 
         <div className='topbar'> 
             <select name="greenhouse" onChange={(e)=>props.getData(e.target.value)} id="greenhouses">
-                {greenhouse.map(g => (
+                {greenhouse.map(g => 
+                 g.owner === JSON.parse(localStorage.getItem('user'))._id && 
+                (
                      <option  key={g.name} value={g.name}>{g.name}</option>
                 ))}  
             </select>

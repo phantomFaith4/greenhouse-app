@@ -12,9 +12,8 @@ import TextField from '@mui/material/TextField';
 import { Buffer } from 'buffer';
 
 export default function UserSettings() {
-  
-  window.Buffer = Buffer;
 
+  window.Buffer = Buffer;
   const [open, setOpen] = useState(false);
   const [user,setUser] = useState([]);
   const [name,setName] = useState();

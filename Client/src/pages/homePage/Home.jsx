@@ -13,13 +13,15 @@ import LoadingComponent from '../../components/loadingComponent/LoadingComponent
 
 
 export default function Home() {
-    const [location, setLocation] = useState('green1');
+    const [location, setLocation] = useState('');
     const [loading, setLoading] = useState(false);
 
     const getName = async (location) =>{
         setLocation(location);
+        console.log("homeLocatio=>",location)
     }
-    useEffect(()=>{
+    useEffect(()=>{ 
+        console.log("LocalUser=>",JSON.parse(localStorage.getItem('user')) ? 'active' : 'notActive');
         setLoading(true);
     },[]);
     return (

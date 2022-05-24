@@ -27,6 +27,7 @@ router.post('/new', async(req,res)=>{
     const contentOfGreenhouse = req.body.content;
     const descriptionOfGreenhouse = req.body.description;
     const sizeOfGreenhouse = req.body.size;
+    const ownerOfGreenhouse = req.body.owner;
     try{
         const newGreenhouse = new Greenhouse({
             name : nameOfGreenhouse,
@@ -34,6 +35,7 @@ router.post('/new', async(req,res)=>{
             content : contentOfGreenhouse,
             description : descriptionOfGreenhouse,
             size : sizeOfGreenhouse,
+            owner: ownerOfGreenhouse,
         });
         const greenhouse = newGreenhouse.save();
         res.status(200).json(greenhouse);

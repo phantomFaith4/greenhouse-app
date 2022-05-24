@@ -8,6 +8,7 @@ import * as notificationOperation from '../PushNotification/pushNotification.js'
 import Button from '@mui/material/Button';
 
 export default function TemperatureComponent({loc}) {
+
   const [value, setValue] = useState(33);
   const [auto,setAuto] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -95,9 +96,10 @@ export default function TemperatureComponent({loc}) {
         )
         :
         (
-          <>
-          <p>No temperature data for this greenhoues</p>
-          </>
+          <div className='noDataDiv'>
+            <span className='noDataForGreenhouseSpan'>No temperature data for this greenhouse</span>
+            <span className='noDataForGreenhouseSpan2'>Go to temperature page and set your preferred options </span>
+          </div>
         )
       }
     </div>

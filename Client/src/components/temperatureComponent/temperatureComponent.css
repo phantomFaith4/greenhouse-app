@@ -38,4 +38,21 @@
 .buttonClass{
     color: #2d63c8;
     background-color: #74b49b;
+} 
+.noDataDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    flex-direction: column;
+}
+.noDataForGreenhouseSpan{
+    font-size: 25px;
+    margin: 10px;
+    text-align: center;
+}
+.noDataForGreenhouseSpan2{
+    font-size: 16px;
+    margin: 10px;
+    text-align: center;
 }

@@ -21,6 +21,9 @@ const GreenhouseSchema = new mongoose.Schema({
         location:{
             type:String,
         },
+        owner:{
+            type:String,
+        }
     },
     {
     timestamps:true,

@@ -43,12 +43,14 @@ export default function GreenhouseSettingsComponent() {
     };
     const addGreenhouse = async ()=>{
         try{
+            const userStorage = JSON.parse(localStorage.getItem('user'));
             const res = await axios.post(`/api/greenhouse/new`,{
                 name: name,
                 location: location,
                 content: content,
                 description: description,
                 size: size,
+                owner: userStorage._id,
             })
             setOpen2(false);
         }catch(err){
@@ -87,36 +89,36 @@ export default function GreenhouseSettingsComponent() {
                 </tr>
                 { 
                 greenhouse.map(g => 
-                        (
-                        <>
-                            <tr>
-                                <td className="tg-0lax">{g.name}</td>
-                                <td className="tg-0lax">{g.location}</td>
-                                <td className="tg-0lax">{g.content}</td> 
-                                <td className="tg-0lax">{g.description}</td>
-                                <td className="tg-0lax">{g.size}</td>
-                                <td  style={{width:"35px"}} className="tg-0lax">
-                                    <i onClick={handleClickOpen}  className="deleteIcon fa-solid fa-trash-can"></i>
-                                </td>
-                            </tr>
-                            <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-                                <DialogTitle id="alert-dialog-title">
-                                {"Do you wish to delete selected greenhouse?"}
-                                </DialogTitle>
-                                <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
-                                    If you delete greenhouse you cant restore it. If you wish not to proceed you can press NO
-                                </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleClose}>NO</Button>
-                                    <Button onClick={(e)=>deleteGreenhouse(g._id)} autoFocus>
-                                        YES
-                                    </Button> 
-                                </DialogActions>
-                            </Dialog>
-                        </>
-                        )
+                        g.owner === JSON.parse(localStorage.getItem('user'))._id && (
+                            <>
+                                <tr>
+                                    <td className="tg-0lax">{g.name}</td>
+                                    <td className="tg-0lax">{g.location}</td>
+                                    <td className="tg-0lax">{g.content}</td> 
+                                    <td className="tg-0lax">{g.description}</td>
+                                    <td className="tg-0lax">{g.size}</td>
+                                    <td  style={{width:"35px"}} className="tg-0lax">
+                                        <i onClick={handleClickOpen}  className="deleteIcon fa-solid fa-trash-can"></i>
+                                    </td>
+                                </tr>
+                                <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+                                    <DialogTitle id="alert-dialog-title">
+                                    {"Do you wish to delete selected greenhouse?"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        If you delete greenhouse you cant restore it. If you wish not to proceed you can press NO
+                                    </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose}>NO</Button>
+                                        <Button onClick={(e)=>deleteGreenhouse(g._id)} autoFocus>
+                                            YES
+                                        </Button> 
+                                    </DialogActions>
+                                </Dialog>
+                            </>
+                            )
                     )
                 } 
                 </tbody>

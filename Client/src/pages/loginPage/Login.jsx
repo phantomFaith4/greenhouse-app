@@ -9,7 +9,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
-  const [user,setUser] = useState([]); 
+  const [user,setUser] = useState([]);  
   const navigate = useNavigate(); 
   useEffect(()=>{
     const userStorage = JSON.parse(localStorage.getItem('user'));
@@ -39,7 +39,10 @@ export default function Login() {
         setUser(response.data);
         navigate('/home');
       }else{
-        setErrorMessage("You need to enter username and password !!!")
+        setErrorMessage("You need to enter username and password !!!");
+        setTimeout(()=> {
+          setErrorMessage()
+        }, 2000);
       }
     };
   return (
@@ -50,9 +53,6 @@ export default function Login() {
                 <input onChange={({ target }) => setUsername(target.value)} className='inputEmail' type='text' placeholder='Email' />
                 <input onChange={({ target }) => setPassword(target.value)} className='inputPassword' type='password' placeholder='Password' />
                 <button className="loginButton" type="submit">Login</button>
-                <span className='registerLink'>Dont have account? 
-                REGISTER
-                </span>
             </form>
             {errorMessage && <Alert variant="filled" severity="error">{errorMessage}</Alert>  }
         </div>

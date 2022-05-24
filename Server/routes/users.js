@@ -22,7 +22,7 @@ router.get('/:id',async(req,res)=>{
 
 router.put('/:id',async(req,res)=>{
     try{
-        const id = req.params.id;
+        const userId = {_id : req.params.id};
         const update = { 
             name: req.body.name,
             lastname: req.body.lastname,
@@ -30,11 +30,11 @@ router.put('/:id',async(req,res)=>{
             phone:req.body.phone,
         };
         try{
-            const doc = await User.findOneAndUpdate(id, update, {
+            const doc = await User.findOneAndUpdate(userId, update, {
             new: true
             });
             res.status(200).json(doc);
-        }catch(err){
+        }catch(err){ 
             res.status(404).json(err);
         }   
     }catch(err){
